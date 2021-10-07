@@ -12,7 +12,8 @@
 //*******************************************************************
 //先方宣言
 //*******************************************************************
-class CRenderer;
+
+
 //*******************************************************************
 //SoundのDataクラス
 //*******************************************************************
@@ -106,11 +107,9 @@ public:
 class CResourceManager
 {
 public:
-	static CResourceManager* GetInstance()			//singletonインタフェース
-	{
-		static CResourceManager Instance;
-		return &Instance;
-	}
+	CResourceManager() {};
+	~CResourceManager() {};
+
 	HRESULT Init();									//初期化
 	HRESULT Uninit();								//解放
 	HRESULT TextureLoader(string filename);			//Textureを外部ファイルから読み込と初期化の関数
@@ -118,16 +117,13 @@ public:
 	HRESULT ModelLoader(string filename);			//3DModelを外部ファイルから読み込と初期化の関数
 	HRESULT ModelLoaderPlus(string filename);		//階層有りXFileの読み込初期化の関数
 
-													//初期化した変数のpointerを保存するMapコンテナ
+	//初期化した変数のpointerを保存するMapコンテナ
 	unordered_map<string, LPDIRECT3DTEXTURE9> m_Texture_Map;//画像を保存しているmap
 	//unordered_map<string, CSoundData*> m_Sound_Map;			//音声を保存しているmap
 	unordered_map<string, CModelData*> m_Model_Map;			//モードを保存しているmap
 	unordered_map<string, CModelDataPlus*> m_PartsModel_Map;//モーションつけモードを保存しているmap
-private:
-	CResourceManager() {};
-	~CResourceManager() {};
 
-	CRenderer* m_pRender;
+private:
 	LPDIRECT3DDEVICE9 m_pDevice;
 
 	//当たり判定ボックスを作る

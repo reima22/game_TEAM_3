@@ -1,45 +1,41 @@
-//===================================================================
-//HeaderFile: Renderer.h
-//Author : Yo jitaku
-//===================================================================
+//=============================================================================
+//
+// レンダリング [renderer.h]
+// Author: Sota Tomoe
+//
+//=============================================================================
 #ifndef _RENDERER_H_
 #define _RENDERER_H_
-#include "main.h"
-#include "d3dx9.h"
-#pragma comment(lib, "d3d9.lib")
-#pragma comment(lib, "d3dx9.lib")//D3DXCreateTextureFromFile
 
-//*******************************************************************
-//先方宣言
-//*******************************************************************
-class CSceneManager;
-//*******************************************************************
-//レンダリングスクリーンのクラス
-//*******************************************************************
+//*****************************************************************************
+// ヘッダのインクルード
+//*****************************************************************************
+#include "main.h"
+#include "scene.h"
+
+//*****************************************************************************
+// マクロ定義
+//*****************************************************************************
+
+//*****************************************************************************
+// レンダラークラス
+//*****************************************************************************
 class CRenderer
 {
 public:
-	static CRenderer* GetInstance() //singletonインタフェース
-	{
-		static CRenderer Instance;
-		return &Instance;
-	}
-	HRESULT Init(HWND hWnd, bool bWindow);		//初期化
-	HRESULT Uninit();							//解放
-	void Draw();								//描画
-	LPDIRECT3DDEVICE9 GetDevice() {
-		return m_pD3DDevice;
-	}											//デバイスを取る
-private:
-	CRenderer() {};
-	~CRenderer() {};
+	CRenderer();
+	~CRenderer();
 
-	LPDIRECT3D9				  m_pD3D;			// Direct3Dオブジェクト
-	LPDIRECT3DDEVICE9		  m_pD3DDevice;		// Deviceオブジェクト(描画に必要)											
-	LPD3DXFONT				  m_pFont;			// フォントへのポインタ
-	CSceneManager*			  m_pSceneManager;	// シーンマネージャーのポインタ
-#ifdef _DEBUG
-	void DrawDebugInfo();						// debugモード
-#endif
+	HRESULT Init(HWND hWnd, BOOL bWindow);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
+
+	LPDIRECT3DDEVICE9 GetDevice(void) { return m_pD3DDevice; }
+
+private:
+	LPDIRECT3D9 m_pD3D;				// Direct3Dオブジェクト
+	LPDIRECT3DDEVICE9 m_pD3DDevice;	// デバイスオブジェクト
+
 };
 #endif

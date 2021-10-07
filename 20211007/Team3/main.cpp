@@ -4,6 +4,8 @@
 //===================================================================
 #include "main.h"
 #include "GameScene.h"
+#include "Manager.h"
+
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -19,7 +21,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 #ifdef _DEBUG		
 int						g_nCountFPS;			// FPSカウンタ
 #endif
-CGameScene* g_pGameScene = new CGameScene;
+
 //=============================================================================
 // メイン関数
 //=============================================================================
@@ -68,8 +70,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		hInstance,
 		NULL);
 
-	// 初期化処理
-	g_pGameScene->InitScene();
+	// マネージャ生成
+	CManager *pManager = new CManager;
+	if (pManager != NULL)
+	{
+		pManager->Init(hInstance, hWnd, TRUE);
+	}
+
 	// 分解能を設定
 	timeBeginPeriod(1);
 
@@ -116,17 +123,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			{// 1/60秒経過
 				dwExecLastTime = dwCurrentTime;	// 現在の時間を保存
 
-												//更新と描画処理
-				g_pGameScene->UpdateScene();
+				//更新と描画処理
+				pManager->Update();
+				pManager->Draw();
 
 				dwFrameCount++;
 			}
 		}
 	}
 
-	// 終了処理
-	g_pGameScene->UninitScene();
-	delete g_pGameScene;
+	// マネージャの破棄
+	if (pManager != NULL)
+	{
+		pManager->Uninit();
+		delete pManager;
+		pManager = NULL;
+	}
 
 	// ウィンドウクラスの登録を解除
 	UnregisterClass(CLASS_NAME, wcex.hInstance);

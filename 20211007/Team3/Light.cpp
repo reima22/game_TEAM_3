@@ -5,7 +5,7 @@
 //
 //=============================================================================
 #include "Light.h"
-#include "manager.h"
+#include "Manager.h"
 
 //*****************************************************************************
 // カメラクラス
@@ -35,7 +35,7 @@ void CLight::Init(void)
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	// デバイス
 	D3DXVECTOR3 vecDir;	// 設定用方向ベクトル
 
-						// ライトをクリアする
+	// ライトをクリアする
 	ZeroMemory(&m_light, sizeof(D3DLIGHT9));
 
 	// ライトの種類を設定

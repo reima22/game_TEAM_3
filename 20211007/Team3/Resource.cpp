@@ -5,14 +5,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Resource.h"
 #include "Renderer.h"
+#include "Manager.h"
 
 //*******************************************************************
 //‰Šú‰»ˆ—
 //*******************************************************************
 HRESULT CResourceManager::Init()
 {
-	m_pRender = CRenderer::GetInstance();
-	m_pDevice = m_pRender->GetDevice();
+	m_pDevice = CManager::GetRenderer()->GetDevice();
 
 	if (FAILED(TextureLoader("Data/Txt/Texture.txt"))) return E_FAIL;
 	//if (FAILED(SoundLoader("Data/Txt/Sound.txt"))) return E_FAIL;
