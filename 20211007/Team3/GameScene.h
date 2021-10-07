@@ -1,8 +1,7 @@
-#include "main.h"
 #ifndef _GAMESCENE_H_
 #define _GAMESCENE_H_
-class CCamera;
-class CLight;
+#include "main.h"
+#include "Resource.h"
 class CGameScene
 {
 public:
@@ -10,5 +9,7 @@ public:
 	void UninitScene();
 	void UpdateScene();
 	void DrawScene();
+private:
+	CResourceManager* m_pResource;
 };
 #endif
