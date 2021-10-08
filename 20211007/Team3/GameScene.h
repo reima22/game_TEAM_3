@@ -13,6 +13,7 @@
 #include "main.h"
 #include "Scene2D.h"
 #include "Scene3D.h"
+#include "Scene3DModel.h"
 
 //*****************************************************************************
 // ‘O•ûéŒ¾
@@ -35,6 +36,7 @@ public:
 private:
 	CScene2D *m_pScene2D;
 	CScene3D *m_pScene3D;
+	CScene3DModel *m_pScene3DModel[5];
 };
 #endif
 

@@ -1,0 +1,9 @@
+################################
+Author:Yo jitaku
+ModelAddress
+################################
+
+#START
+SCAFFOLD1				Data/Model/scaffold001.x
+TREE1					Data/Model/tree01.x
+#END

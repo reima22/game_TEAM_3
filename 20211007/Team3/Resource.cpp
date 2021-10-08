@@ -14,10 +14,11 @@ HRESULT CResourceManager::Init()
 {
 	m_pDevice = CManager::GetRenderer()->GetDevice();
 
-	if (FAILED(TextureLoader("Data/Txt/Texture.txt"))) return E_FAIL;
+	if (FAILED(TextureLoader("Data/Text/Texture.txt"))) return E_FAIL;
 	//if (FAILED(SoundLoader("Data/Txt/Sound.txt"))) return E_FAIL;
-	if (FAILED(ModelLoader("Data/Txt/Model.txt"))) return E_FAIL;
-	if (FAILED(ModelLoaderPlus("Data/Txt/PlayerModel.txt"))) return E_FAIL;
+	if (FAILED(ModelLoader("Data/Text/Model.txt"))) return E_FAIL;
+	if (FAILED(ModelLoaderPlus("Data/Text/PlayerModel.txt"))) return E_FAIL;
+
 	return S_OK;
 }
 

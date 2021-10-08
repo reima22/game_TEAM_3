@@ -38,7 +38,8 @@ void CCamera::Init(void)
 	m_vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_rot = VECTOR3_ZERO;
 
-	m_fCamDist = 50.0f;
+	m_fCamDist = CAMERA_DISTANCE;
+	m_fCamSpd = CAMERA_SPEED;
 }
 
 //=============================================================================
@@ -56,7 +57,7 @@ void CCamera::Update(void)
 {
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
 
-
+	// inputs
 	if (pKeyboard->GetPress(DIK_W))
 	{
 		if (pKeyboard->GetPress(DIK_D))
@@ -79,6 +80,10 @@ void CCamera::Update(void)
 		MoveR(-90.0f);
 	else if (pKeyboard->GetPress(DIK_D))
 		MoveR(90.0f);
+	if (pKeyboard->GetPress(DIK_SPACE))
+		m_posR.y += m_fCamSpd;
+	else if (pKeyboard->GetPress(DIK_LCONTROL))
+		m_posR.y -= m_fCamSpd;
 
 
 
@@ -122,6 +127,6 @@ void CCamera::SetCamera(LPDIRECT3DDEVICE9 pDevice)
 
 void CCamera::MoveR(float fAngDeg)
 {
-	m_posR.x += sinf(m_rot.y + D3DX_PI + D3DXToRadian(fAngDeg)) * 3.0f;
-	m_posR.z += cosf(m_rot.y + D3DX_PI + D3DXToRadian(fAngDeg)) * 3.0f;
+	m_posR.x += sinf(m_rot.y + D3DX_PI + D3DXToRadian(fAngDeg)) * m_fCamSpd;
+	m_posR.z += cosf(m_rot.y + D3DX_PI + D3DXToRadian(fAngDeg)) * m_fCamSpd;
 }

@@ -38,10 +38,19 @@ CGameScene::~CGameScene()
 HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 {
 	m_pScene2D = CScene2D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(100.0f, 100.0f, 0.0f));
-	m_pScene2D->BindTexture(NULL);
 
-	m_pScene3D = CScene3D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(10.0f, 0.0f, 10.0f));
-	m_pScene3D->BindTexture(NULL);
+	// 床ポリ
+	m_pScene3D = CScene3D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(1000.0f, 0.0f, 1000.0f), "TexTest01");
+	m_pScene3D->SetTextureUV(
+		D3DXVECTOR2(0.0f, 10.0f),
+		D3DXVECTOR2(0.0f, 0.0f),
+		D3DXVECTOR2(10.0f, 10.0f),
+		D3DXVECTOR2(10.0f, 0.0f));
+
+	// モデル
+	for (int i = 0; i < 5; i++)
+		m_pScene3DModel[i] = CScene3DModel::Create(D3DXVECTOR3(0.0f, 0.0f, 80.0f * i), VECTOR3_ZERO, "SCAFFOLD1");
+
 
 	return S_OK;
 }
@@ -51,7 +60,6 @@ HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 //=============================================================================
 void CGameScene::Uninit(void)
 {
-
 	// このオブジェクトの開放
 	this->Release();
 }
@@ -75,4 +83,6 @@ void CGameScene::Draw(void)
 {
 	m_pScene2D->Draw();
 	m_pScene3D->Draw();
+	for (auto eachScene : m_pScene3DModel)
+		eachScene->Draw();
 }

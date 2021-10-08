@@ -1,0 +1,9 @@
+################################
+Author:Yo jitaku
+TextureAddress
+################################
+
+#START
+TexTest01			Data/Texture/Tex001.jpg
+
+#END

@@ -85,9 +85,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 
 	// リソースマネージャの生成、初期化
 	m_pResourceManager = new CResourceManager;
-	if (m_pResourceManager != NULL)
+	if (FAILED(m_pResourceManager->Init()))
 	{
-		m_pResourceManager->Init();
+		return E_FAIL;
 	}
 
 

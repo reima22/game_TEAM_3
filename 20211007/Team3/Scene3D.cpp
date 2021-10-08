@@ -7,6 +7,7 @@
 #include "Scene3D.h"
 #include "Manager.h"
 #include "Input.h"
+#include "Resource.h"
 
 //*****************************************************************************
 // ポリゴンクラス (派生元：オブジェクトクラス）
@@ -141,9 +142,11 @@ void CScene3D::Draw(void)
 //=============================================================================
 // テクスチャのバインド
 //=============================================================================
-void CScene3D::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CScene3D::BindTexture(string TextureName)
 {
-	m_pTexture = pTexture;
+	CResourceManager *pResource = CManager::GetResourceManager();
+
+	m_pTexture = pResource->m_Texture_Map[TextureName];
 }
 
 //=============================================================================
@@ -192,6 +195,19 @@ CScene3D *CScene3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 	if (pScene3D != NULL)
 	{
 		pScene3D->Init(pos, rot, size);
+	}
+
+	return pScene3D;
+}
+
+CScene3D *CScene3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size, string TextureName)
+{
+	CScene3D *pScene3D;
+	pScene3D = new CScene3D;
+	if (pScene3D != NULL)
+	{
+		pScene3D->Init(pos, rot, size);
+		pScene3D->BindTexture(TextureName);
 	}
 
 	return pScene3D;
