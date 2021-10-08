@@ -40,6 +40,9 @@ HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 	m_pScene2D = CScene2D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(100.0f, 100.0f, 0.0f));
 	m_pScene2D->BindTexture(NULL);
 
+	m_pScene3D = CScene3D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(10.0f, 0.0f, 10.0f));
+	m_pScene3D->BindTexture(NULL);
+
 	return S_OK;
 }
 
@@ -48,7 +51,6 @@ HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 //=============================================================================
 void CGameScene::Uninit(void)
 {
-	m_pScene2D->Uninit();
 
 	// このオブジェクトの開放
 	this->Release();
@@ -72,4 +74,5 @@ void CGameScene::Update(void)
 void CGameScene::Draw(void)
 {
 	m_pScene2D->Draw();
+	m_pScene3D->Draw();
 }

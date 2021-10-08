@@ -158,7 +158,8 @@ void CScene::Release(void)
 	auto itr = next(m_apScene[m_nPriority].begin(), m_nID);
 	if ((*itr) != NULL)
 	{
-		m_apScene[m_nPriority].erase(itr);
+		delete (*itr);
+		(*itr) = NULL;
 		m_nNumAll--;
 	}
 }
