@@ -90,8 +90,6 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 		return E_FAIL;
 	}
 
-
-
 	// とりあえずゲームシーン置いとく
 	m_pGameScene = new CGameScene;
 	if (FAILED(m_pGameScene->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO)))
