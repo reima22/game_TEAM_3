@@ -16,7 +16,6 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define SCENE_MAX (128)
 #define SCENE_PRIORITY_MAX (5)
 #define SCENE_PRIORITY_DEFAULT (3)
 
@@ -48,22 +47,19 @@ public:
 	static void ReleaseAll(void);
 	static void UpdateAll(void);
 	static void DrawAll(void);
-	static CScene *GetScene(int nPriority, int nScene);
-	static void SetScene(int nPriority, int nScene, CScene *obj);
+	static vector<CScene*> *CScene::GetSceneList(int nPriority);
 
 protected:
 	void Release(void);		// Scene2DのUninitから呼ぶからprotected
 
 private:
+	D3DXVECTOR3 m_pos;						// 位置
+	D3DXVECTOR3 m_rot;						// 向き
+	D3DXVECTOR3 m_size;						// サイズ
 	int m_nPriority;						// 優先順位の番号
-	int m_nID;								// 格納先の番号
-	D3DXVECTOR3 m_pos;
-	D3DXVECTOR3 m_rot;
-	D3DXVECTOR3 m_size;
 
-	static list<CScene*> m_apScene[SCENE_PRIORITY_MAX];
-	static int m_nNumAll;					// 全体の生成数
+	static vector<CScene*> m_aSceneVc[SCENE_PRIORITY_MAX];	// シーンのリスト
+	static int m_nNumAll;									// 全体の生成数
 };
 
 #endif
-
