@@ -4,13 +4,12 @@
 // Author: Sota Tomoe
 //
 //=============================================================================
-#include "scene.h"
-
+#include "Scene.h"
 
 //*****************************************************************************
 // 静的メンバ変数
 //*****************************************************************************
-list<CScene*> CScene::m_apScene[SCENE_PRIORITY_MAX];
+vector <CScene*> CScene::m_aSceneVc[SCENE_PRIORITY_MAX];
 int CScene::m_nNumAll;
 
 //*****************************************************************************
@@ -22,26 +21,12 @@ int CScene::m_nNumAll;
 //=============================================================================
 CScene::CScene(int nPriority)
 {
-	// 指定された優先度の場所に
-	// 空いている場所にCSceneのポインタを格納
-	// 個数をインクリメント
-	// IDを記録
-	m_apScene[nPriority].push_front(this);
+	// コンテナの先頭からこのシーンのポインタを格納
+	// 全体数をインクリメント
+	// 優先度を記録
+	m_aSceneVc[nPriority].push_back(this);
 	m_nNumAll++;
 	m_nPriority = nPriority;
-
-	//for (int nCntScene = 0; nCntScene < SCENE_MAX; nCntScene++)
-	//{
-	//	if (m_apScene[nPriority][nCntScene] == NULL)
-	//	{
-	//		m_apScene[nPriority][nCntScene] = this;
-	//		m_nNumAll++;
-	//		m_nID = nCntScene;
-	//		m_nPriority = nPriority;
-
-	//		break;
-	//	}
-	//}
 }
 
 //=============================================================================
@@ -57,7 +42,6 @@ CScene::~CScene()
 //=============================================================================
 HRESULT CScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 {
-
 	return S_OK;
 }
 
@@ -90,24 +74,13 @@ void CScene::Draw(void)
 //=============================================================================
 void CScene::ReleaseAll(void)
 {
-	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++)
-	{
-		for (auto itr = m_apScene[nCntPriority].begin(); itr != m_apScene[nCntPriority].end(); itr++) {
-			if ((*itr) != NULL)
-				(*itr)->Uninit();
+	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
+		for (int i = 0; 0 < m_aSceneVc[nCntPriority].size();) {
+			if (m_aSceneVc[nCntPriority][i] != NULL) {
+				m_aSceneVc[nCntPriority][i]->Uninit();
+			}
 		}
 	}
-
-	//for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++)
-	//{
-	//	for (int nCntScene = 0; nCntScene < SCENE_MAX; nCntScene++)
-	//	{
-	//		if (m_apScene[nCntPriority][nCntScene] != NULL)
-	//		{
-	//			m_apScene[nCntPriority][nCntScene]->Uninit();
-	//		}
-	//	}
-	//}
 }
 
 //=============================================================================
@@ -115,25 +88,13 @@ void CScene::ReleaseAll(void)
 //=============================================================================
 void CScene::UpdateAll(void)
 {
-
-	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++)
-	{
-		for (auto itr = m_apScene[nCntPriority].begin(); itr != m_apScene[nCntPriority].end(); itr++) {
-			if ((*itr) != NULL)
-				(*itr)->Update();
+	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
+		for (unsigned int i = 0; i < m_aSceneVc[nCntPriority].size(); i++) {
+			if (m_aSceneVc[nCntPriority][i] != NULL) {
+				m_aSceneVc[nCntPriority][i]->Update();
+			}
 		}
 	}
-
-	//for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++)
-	//{
-	//	for (int nCntScene = 0; nCntScene < SCENE_MAX; nCntScene++)
-	//	{
-	//		if (m_apScene[nCntPriority][nCntScene] != NULL)
-	//		{
-	//			m_apScene[nCntPriority][nCntScene]->Update();
-	//		}
-	//	}
-	//}
 }
 
 //=============================================================================
@@ -141,11 +102,11 @@ void CScene::UpdateAll(void)
 //=============================================================================
 void CScene::DrawAll(void)
 {
-	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++)
-	{
-		for (auto itr = m_apScene[nCntPriority].begin(); itr != m_apScene[nCntPriority].end(); itr++) {
-			if ((*itr) != NULL)
-				(*itr)->Draw();
+	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
+		for (unsigned int i = 0; i < m_aSceneVc[nCntPriority].size(); i++) {
+			if (m_aSceneVc[nCntPriority][i] != NULL) {
+				m_aSceneVc[nCntPriority][i]->Draw();
+			}
 		}
 	}
 }
@@ -155,41 +116,22 @@ void CScene::DrawAll(void)
 //=============================================================================
 void CScene::Release(void)
 {
-	auto itr = next(m_apScene[m_nPriority].begin(), m_nID);
-	if ((*itr) != NULL)
-	{
-		delete (*itr);
-		(*itr) = NULL;
-		m_nNumAll--;
+	for (unsigned int i = 0; i < m_aSceneVc[m_nPriority].size(); i++) {
+		if (m_aSceneVc[m_nPriority][i] == this) {
+			int nPriority = m_nPriority;
+			m_aSceneVc[nPriority].erase(m_aSceneVc[nPriority].begin() + i);
+			m_nNumAll--;
+			break;
+		}
 	}
 }
 
 //=============================================================================
-// オブジェクトが入ったポインタを取得
+// シーンのコンテナを取得
 //=============================================================================
-CScene *CScene::GetScene(int nPriority, int nScene)
+vector<CScene*> *CScene::GetSceneList(int nPriority)
 {
-	auto itr = next(&m_apScene[nPriority], nScene);
-	return (CScene*)(itr);
-
-	//return m_apScene[nPriority][nScene];
-}
-
-//=============================================================================
-// オブジェクトのポインタ格納
-//=============================================================================
-void CScene::SetScene(int nPriority, int nScene, CScene *obj)
-{
-	auto itr = m_apScene[nPriority].begin();
-	advance(itr, nScene);
-	if ((*itr) == NULL)
-		m_apScene[nPriority].emplace(itr, obj);
-	
-
-	//if (m_apScene[nPriority][nScene] == NULL)
-	//{ 
-	//	m_apScene[nPriority][nScene] = obj;
-	//}
+	return &m_aSceneVc[nPriority];
 }
 
 //=============================================================================
@@ -197,15 +139,13 @@ void CScene::SetScene(int nPriority, int nScene, CScene *obj)
 //=============================================================================
 void CScene::SetPriority(int nPriority)
 {
-	//for (int nCntScene = 0; nCntScene < SCENE_MAX; nCntScene++)
-	//{
-	//	if (m_apScene[nPriority][nCntScene] == NULL)
-	//	{
-	//		m_apScene[nPriority][nCntScene] = this;	// 新しい場所にポインタ保存
-	//		m_apScene[m_nPriority][m_nID] = NULL;	// 元の場所を空に
-	//		m_nID = nCntScene;						// 新しいID設定
-	//		m_nPriority = nPriority;				// 新しい優先度設定
-	//		m_nNumAll++;							// 減った数を戻す
-	//	}
-	//}
+	CScene *pScene = this;
+	for (auto itr = m_aSceneVc[m_nPriority].begin(); itr != m_aSceneVc[m_nPriority].end(); itr++) {
+		if ((*itr) == this) {
+			m_aSceneVc[m_nPriority].erase(itr);
+			break;
+		}
+	}
+	m_aSceneVc[nPriority].push_back(this);
+	m_nPriority = nPriority;
 }

@@ -7,6 +7,7 @@
 #include "Gamescene.h"
 #include "Input.h"
 #include "Manager.h"
+#include "Player.h"
 
 //*****************************************************************************
 // 静的メンバ変数
@@ -49,9 +50,11 @@ HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 
 	// モデル
 	for (int i = 0; i < 5; i++)
-		m_pScene3DModel[i] = CScene3DModel::Create(D3DXVECTOR3(0.0f, 0.0f, 80.0f * i), VECTOR3_ZERO, "SCAFFOLD1");
+		m_pScene3DModel[i] = CScene3DModel::Create(D3DXVECTOR3(0.0f, 0.0f, (80.0f * i) + 80.0f), VECTOR3_ZERO, "SCAFFOLD1");
 
-
+	// テストプレイヤー
+	CPlayer::Create(VECTOR3_ZERO, VECTOR3_ZERO);
+	
 	return S_OK;
 }
 
