@@ -1,45 +1,37 @@
 //=============================================================================
 //
-// ゲーム画面 [game.h]
+// 足場 [Scaffold.h]
 // Author: Sota Tomoe
 //
 //=============================================================================
-#ifndef _GAME_H_
-#define _GAME_H_
+#ifndef _SCAFFOLD_H_
+#define _SCAFFOLD_H_
 
 //*****************************************************************************
-// ヘッダーのインクルード
+// ヘッダのインクルード
 //*****************************************************************************
 #include "main.h"
-#include "Scene2D.h"
-#include "Scene3D.h"
 #include "Scene3DModel.h"
 
 //*****************************************************************************
-// 前方宣言
+// 足場クラス
 //*****************************************************************************
-class CObjectManager;
-
-//*****************************************************************************
-// ゲーム画面クラス ( 継承元: オブジェクトクラス [scene] )
-//*****************************************************************************
-class CGameScene : public CScene
+class CScaffold : public CScene3DModel
 {
 public:
-	CGameScene();
-	~CGameScene();
+	CScaffold();
+	~CScaffold();
 
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	
-	static CObjectManager *GetObjectManager(void) { return m_pObjectManager; }
 
+	static CScaffold *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 private:
-	CScene3D *m_pScene3D;
 
-	static CObjectManager *m_pObjectManager;
 };
+
 #endif
+
 

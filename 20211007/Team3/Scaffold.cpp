@@ -1,28 +1,19 @@
 //=============================================================================
 //
-// ゲーム画面 [game.cpp]
+// 足場 [Scaffold.cpp]
 // Author: Sota Tomoe
 //
 //=============================================================================
-#include "Gamescene.h"
-#include "Input.h"
-#include "Manager.h"
-#include "Player.h"
-#include "ObjectManager.h"
+#include "Scaffold.h"
 
 //*****************************************************************************
-// 静的メンバ変数
-//*****************************************************************************
-CObjectManager *CGameScene::m_pObjectManager = NULL;
-
-//*****************************************************************************
-// ゲーム画面クラス ( 継承元: オブジェクトクラス [scene] )
+// 足場クラス
 //*****************************************************************************
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CGameScene::CGameScene()
+CScaffold::CScaffold()
 {
 
 }
@@ -30,67 +21,63 @@ CGameScene::CGameScene()
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CGameScene::~CGameScene()
+CScaffold::~CScaffold()
 {
 
 }
 
 //=============================================================================
-// 初期化
+// 初期化処理
 //=============================================================================
-HRESULT CGameScene::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
+HRESULT CScaffold::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 {
-	// モデル管理クラス生成
-	m_pObjectManager = new CObjectManager;
-	if (FAILED(m_pObjectManager->Init())) {
+	if (FAILED(CScene3DModel::Init(pos, rot, size))) {
 		return E_FAIL;
 	}
 
-	// 床ポリ
-	m_pScene3D = CScene3D::Create(VECTOR3_ZERO, VECTOR3_ZERO, D3DXVECTOR3(1000.0f, 0.0f, 1000.0f), "TexTest01");
-	m_pScene3D->SetTextureUV(
-		D3DXVECTOR2(0.0f, 10.0f),
-		D3DXVECTOR2(0.0f, 0.0f),
-		D3DXVECTOR2(10.0f, 10.0f),
-		D3DXVECTOR2(10.0f, 0.0f));
-
-	// テストプレイヤー
-	CPlayer::Create(VECTOR3_ZERO, VECTOR3_ZERO);
-	
+	BindModel("SCAFFOLD1");
 	return S_OK;
 }
 
 //=============================================================================
-// 終了
+// 終了処理
 //=============================================================================
-void CGameScene::Uninit(void)
+void CScaffold::Uninit(void)
 {
-	// 足場管理クラス破棄
-	m_pObjectManager->Uninit();
+	CScene3DModel::Uninit();
 
-	// このオブジェクトの開放
-	this->Release();
+
 }
 
 //=============================================================================
-// 更新
+// 更新処理
 //=============================================================================
-void CGameScene::Update(void)
+void CScaffold::Update(void)
 {
-	// 足場管理クラス更新
-	m_pObjectManager->Update();
+	CScene3DModel::Update();
 
-	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
-	if (pKeyboard->GetTrigger(DIK_B))
+
+}
+
+//=============================================================================
+// 描画処理
+//=============================================================================
+void CScaffold::Draw(void)
+{
+	CScene3DModel::Draw();
+}
+
+//=============================================================================
+// 生成関数
+//=============================================================================
+CScaffold *CScaffold::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
+{
+	CScaffold *pScaffold;
+	pScaffold = new CScaffold;
+	if (pScaffold != NULL)
 	{
-
+		pScaffold->Init(pos, rot, VECTOR3_ZERO);
 	}
-}
 
-//=============================================================================
-// 描画
-//=============================================================================
-void CGameScene::Draw(void)
-{
-
+	return pScaffold;
 }
