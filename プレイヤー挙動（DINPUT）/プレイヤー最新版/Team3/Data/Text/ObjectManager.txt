@@ -1,0 +1,56 @@
+----------------------------------------------
+テンプレ
+（足場）
+SCAFFOLD
+	TYPE = 種類
+	POS = 位置
+	ROT = 向き
+END_SCAFFOLD
+
+（モデル）
+MODELSET
+	NAME = モデルの名前、Model.txt参照
+	POS = 位置
+	ROT = 向き
+END_MODELSET
+----------------------------------------------
+
+#start
+
+SCAFFOLD
+	TYPE = 0
+	POS = 0 0 100
+	ROT = 0 0 0
+END_SCAFFOLD
+
+SCAFFOLD
+	TYPE = 0
+	POS = 0 0 150
+	ROT = 0 0 0
+END_SCAFFOLD
+
+SCAFFOLD
+	TYPE = 0
+	POS = 0 0 200
+	ROT = 0 0 0
+END_SCAFFOLD
+
+SCAFFOLD
+	TYPE = 0
+	POS = 0 0 250
+	ROT = 0 0 0
+END_SCAFFOLD
+
+MODELSET
+	POS = 0 0 0
+	ROT = 0 180 0
+	NAME = START
+END_MODELSET
+
+MODELSET
+	POS = 0 0 350
+	ROT = 0 90 0
+	NAME = GOAL
+END_MODELSET
+
+#end
