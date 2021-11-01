@@ -10,6 +10,7 @@
 #include "Renderer.h"
 #include "Resource.h"
 #include "GameScene.h"
+#include "select.h"
 #include "Input.h"
 
 //*****************************************************************************
@@ -22,6 +23,7 @@ CInputKeyboard *CManager::m_pInputKeyboard = NULL;
 CInputMouse *CManager::m_pInputMouse = NULL;
 CResourceManager *CManager::m_pResourceManager = NULL;
 CGameScene *CManager::m_pGameScene = NULL;
+CStageSelect *CManager::m_pStage = NULL;
 
 //*****************************************************************************
 // マネージャクラス
@@ -91,9 +93,14 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	}
 
 	// とりあえずゲームシーン置いとく
-	m_pGameScene = new CGameScene;
-	if (FAILED(m_pGameScene->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO)))
-	{
+	//m_pGameScene = new CGameScene;
+	//if (FAILED(m_pGameScene->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO)))
+	//{
+	//	return E_FAIL;
+	//}
+
+	m_pStage = new CStageSelect;
+	if (FAILED(m_pStage->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO))) {
 		return E_FAIL;
 	}
 

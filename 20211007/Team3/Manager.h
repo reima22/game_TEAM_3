@@ -22,6 +22,7 @@ class CCamera;
 class CLight;
 class CGameScene;
 class CResourceManager;
+class CStageSelect;
 
 //*****************************************************************************
 // マネージャクラス
@@ -45,6 +46,7 @@ public:
 	static CInputMouse *GetInputMouse(void) { return m_pInputMouse; }
 	static CResourceManager *GetResourceManager(void) { return m_pResourceManager; }
 	static CGameScene *GetGame(void) { return m_pGameScene; }
+	static CStageSelect *GetStageSelect(void) { return m_pStage; }
 
 private:
 	static CRenderer *m_pRenderer;
@@ -54,7 +56,7 @@ private:
 	static CInputMouse *m_pInputMouse;
 	static CResourceManager *m_pResourceManager;
 	static CGameScene *m_pGameScene;
-
+	static CStageSelect *m_pStage;
 };
 
 #endif

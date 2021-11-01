@@ -39,6 +39,9 @@ HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 	SetRot(rot);
 	SetSize(VECTOR3_ZERO);
 
+	// 種類をプレイヤーに設定
+	SetObjType(OBJTYPE_PLAYER);
+
 	// 各モデルの親モデルインデックスを設定
 	m_nIndexParent[0] = -1;
 	m_nIndexParent[1] = 0;
@@ -204,6 +207,7 @@ void CPlayer::Update(void)
 	else if (pKey->GetPress(DIK_RIGHT)) {
 		pos.x++;
 	}
+	pos.y--;
 	SetPos(pos);
 #endif
 }

@@ -19,6 +19,8 @@
 // 前方宣言
 //*****************************************************************************
 class CObjectManager;
+class CCollision;
+class CPlayer;
 
 //*****************************************************************************
 // ゲーム画面クラス ( 継承元: オブジェクトクラス [scene] )
@@ -35,11 +37,15 @@ public:
 	void Draw(void);
 	
 	static CObjectManager *GetObjectManager(void) { return m_pObjectManager; }
+	static CCollision *GetCollision(void) { return m_pCollision; }
+	static CPlayer *GetPlayer(void) { return m_pPlayer; }
 
 private:
 	CScene3D *m_pScene3D;
 
 	static CObjectManager *m_pObjectManager;
+	static CCollision *m_pCollision;
+	static CPlayer *m_pPlayer;
 };
 #endif
 

@@ -1,19 +1,23 @@
 //=============================================================================
 //
-// 足場 [Scaffold.cpp]
+// 当たり判定 [Collision.cpp]
 // Author: Sota Tomoe
 //
 //=============================================================================
-#include "Scaffold.h"
+#include "Collision.h"
+#include "Manager.h"
+#include "GameScene.h"
+#include "Scene.h"
+#include "Player.h"
 
 //*****************************************************************************
-// 足場クラス
+// 当たり判定クラス
 //*****************************************************************************
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CScaffold::CScaffold()
+CCollision::CCollision()
 {
 
 }
@@ -21,7 +25,7 @@ CScaffold::CScaffold()
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CScaffold::~CScaffold()
+CCollision::~CCollision()
 {
 
 }
@@ -29,56 +33,54 @@ CScaffold::~CScaffold()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CScaffold::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
+HRESULT CCollision::Init(void)
 {
-	if (FAILED(CScene3DModel::Init(pos, rot, size))) {
-		return E_FAIL;
-	}
 
-	BindModel("SCAFFOLD1");
-	SetObjType(OBJTYPE_SCAFFOLD);
+
 	return S_OK;
 }
 
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CScaffold::Uninit(void)
+void CCollision::Uninit(void)
 {
-	CScene3DModel::Uninit();
-
 
 }
 
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CScaffold::Update(void)
+void CCollision::Update(void)
 {
-	CScene3DModel::Update();
+	// すべてのオブジェクトを検索
+	//for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
+	//	auto SceneVec = CScene::GetSceneList(nCntPriority);	// 現在の優先度のコンテナ取得
+	//	for (int nCntScene = 0; nCntScene < (signed)SceneVec->size(); nCntScene++) {
+	//		PlayerCollide((*SceneVec)[nCntScene]);
+	//	}
 
-
+	//}
 }
 
 //=============================================================================
-// 描画処理
+// プレイヤーの当たり判定
 //=============================================================================
-void CScaffold::Draw(void)
-{
-	CScene3DModel::Draw();
-}
+//void CCollision::PlayerCollide(CScene *pCollider)
+//{
+//	CPlayer *pPlayer = CGameScene::GetPlayer();
+//	if (pCollider->GetObjType() == CScene::OBJTYPE_SCAFFOLD) {
+//
+//		
+//	}
+//}
 
 //=============================================================================
-// 生成関数
+// AABB
 //=============================================================================
-CScaffold *CScaffold::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
+bool CCollision::AABB2(D3DXVECTOR3 posA, D3DXVECTOR3 sizeA, D3DXVECTOR3 posB, D3DXVECTOR3 sizeB)
 {
-	CScaffold *pScaffold;
-	pScaffold = new CScaffold;
-	if (pScaffold != NULL)
-	{
-		pScaffold->Init(pos, rot, VECTOR3_ZERO);
-	}
 
-	return pScaffold;
+
+	return false;
 }

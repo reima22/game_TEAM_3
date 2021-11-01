@@ -24,9 +24,11 @@ CScene::CScene(int nPriority)
 	// コンテナの先頭からこのシーンのポインタを格納
 	// 全体数をインクリメント
 	// 優先度を記録
+	// オブジェクトの種類を無しに設定
 	m_aSceneVc[nPriority].push_back(this);
 	m_nNumAll++;
 	m_nPriority = nPriority;
+	m_objType = OBJTYPE_NONE;
 }
 
 //=============================================================================
