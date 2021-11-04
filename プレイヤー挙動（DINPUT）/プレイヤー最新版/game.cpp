@@ -65,8 +65,7 @@ HRESULT CGame::Init(void)
 	//CMeshField::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 10, 10, 100, 100);
 
 	// メッシュフィールド
-	m_pTerrain = new CTerrain(300, 50, 10);
-
+	m_pTerrain = CTerrain::Create(CTerrainInfo::TERRAIN_TYPE::TERRAIN_LAVA);
 	//CMeshField::Create(D3DXVECTOR3(0.0f, -50.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 10, 10, 100, 100);
 
 	// 3Dプレイヤーの表示

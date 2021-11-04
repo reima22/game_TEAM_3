@@ -6,44 +6,47 @@
 #include "scene.h"
 #include "scene3D.h"
 #include "texture.h"
+#include "textdata_Terrain.h"
 
-//*******************************************************************
-//メモリの解放
-//*******************************************************************
-void CTerrain::Uninit()
+//==============================================================================
+// 生成処理
+//==============================================================================
+CTerrain *CTerrain::Create(CTerrainInfo::TERRAIN_TYPE nType)
 {
-	if (m_pDevice != nullptr)
-	{
-		m_pDevice->Release();
-		m_pDevice = nullptr;
-	}
-	if (m_pTexture != nullptr)
-	{
-		m_pTexture->Release();
-		m_pTexture = nullptr;
-	}
-	if (m_pVtxBuff != nullptr)
-	{
-		m_pVtxBuff->Release();
-		m_pVtxBuff = nullptr;
-	}
-	if (m_pIdxBuff != nullptr)
-	{
-		m_pIdxBuff->Release();
-		m_pIdxBuff = nullptr;
-	}
-	delete m_pManager;
-	m_pManager = nullptr;
+	// ローカル変数宣言
+	CTerrain *pTerrain = new CTerrain;
+	
+	// 初期化
+	if (pTerrain != NULL)
+		pTerrain->Init(nType);
+
+	return pTerrain;
 }
 
 //*******************************************************************
 //初期化
 //*******************************************************************
-HRESULT CTerrain::Init()
+HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 {
+	// 地形データの取得
+	CTextDataTerrain* pTerrain = CTextDataTerrain::GetDataTerrain();
+	int nTypeID = nType;
+	m_pDataTerrain = pTerrain->GetTerrain(nTypeID);
+	m_nVertsPerRow = m_pDataTerrain->m_nCellsPerRow + 1;
+	m_nVertsPerCol = m_pDataTerrain->m_nCellsPerCol + 1;
+	m_nNumVertices = m_nVertsPerRow * m_nVertsPerCol;
+	m_nCells = m_pDataTerrain->m_nCellsPerRow * m_pDataTerrain->m_nCellsPerCol;
+	m_nNumTriangles = m_nCells * 2;
+	m_nNumIndex = m_nCells * 6;
+	m_nDrawBlock = m_nNumTriangles / MAX_PRIMITIVE_COUNT;
+	m_nDrawTriRemainder = m_nNumIndex % MAX_PRIMITIVE_COUNT;
+	m_fTerrainWidth = m_pDataTerrain->m_nCellsPerRow * m_pDataTerrain->m_fCellSpacing;
+	m_fTerrainDepth = m_pDataTerrain->m_nCellsPerCol * m_pDataTerrain->m_fCellSpacing;
+
+	m_pWave->SetWave(m_pDataTerrain->m_W_fPower, m_pDataTerrain->m_W_fFrequency, m_pDataTerrain->m_W_fSpeed, m_pDataTerrain->m_W_dirX);
+
 	WORD* pIdx;										//Indexバッファ
 	VERTEX_3D *pVtx;								//頂点バッファ
-
 	float fStartX = -m_fTerrainWidth / 2.0f;		  //x座標の始点
 	float fStartZ = -m_fTerrainDepth / 2.0f;		  //z座標の始点
 	float fCoordU = 0.0f;
@@ -87,9 +90,9 @@ HRESULT CTerrain::Init()
 		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)//X頂点の巡り
 		{
 			pVtx[nIndex].pos = D3DXVECTOR3(
-				(fStartZ + nCntRow * m_fCellSpacing),
+				(fStartZ + nCntRow * m_pDataTerrain->m_fCellSpacing),
 				(float)TERRAIN_HEIGHT,
-				(fStartX + nCntCol * m_fCellSpacing));
+				(fStartX + nCntCol * m_pDataTerrain->m_fCellSpacing));
 			pVtx[nIndex].nor = D3DXVECTOR3(0.f, 1.f, 0.f);
 			pVtx[nIndex].col = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 			pVtx[nIndex].tex = D3DXVECTOR2(nCntCol * fCoordU, nCntRow * fCoordV);
@@ -115,9 +118,9 @@ HRESULT CTerrain::Init()
 
 	nIndex = 0;
 	
-	for (int row = 0; row < m_nCellsPerCol; row++)			//セル数(行)
+	for (int row = 0; row < m_pDataTerrain->m_nCellsPerCol; row++)			//セル数(行)
 	{
-		for (int col = 0; col < m_nCellsPerRow; col++)		//セル数(列)
+		for (int col = 0; col < m_pDataTerrain->m_nCellsPerRow; col++)		//セル数(列)
 		{
 			//毎回描画必要の矩形(セル)(=二つ三角形=四つ頂点バッファ=六つIndexバッファ)
 			pIdx[nIndex] = row * m_nVertsPerRow + col;
@@ -139,25 +142,11 @@ HRESULT CTerrain::Init()
 
 void CTerrain::Update()
 {
-	VERTEX_3D *pVtx;												//頂点バッファ
+	m_nCntTime++;
+	TerrainMove();
 
-	// バッファロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	// ローカル変数宣言
-	int nIndex = 0;
-	
-	for (int nCntRow = 0; nCntRow < m_nVertsPerCol; nCntRow++)		//Z頂点の巡り
-	{
-		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)	//X頂点の巡り
-		{
-			pVtx[nIndex].tex.x += TERRAIN_MOVE_SPEED;
-			nIndex++;
-		}
-	}
-
-	// バッファアンロック
-	m_pVtxBuff->Unlock();
+	if (m_pWave->m_bWaveLine)
+		WaveLineUpdate();
 }
 
 //*******************************************************************
@@ -169,9 +158,9 @@ void CTerrain::Draw()
 	D3DXMATRIX MtxRot, MtxTrans;	// Temporary matrices
 
 	D3DXMatrixIdentity(&MtxWorld);									 //単位行列
-	D3DXMatrixRotationYawPitchRoll(&MtxRot, 0, 0, 0);
+	D3DXMatrixRotationYawPitchRoll(&MtxRot, m_pDataTerrain->m_Rot.x, m_pDataTerrain->m_Rot.y, m_pDataTerrain->m_Rot.z);
 	D3DXMatrixMultiply(&MtxWorld, &MtxWorld, &MtxRot);
-	D3DXMatrixTranslation(&MtxTrans, 0, 0, 0);
+	D3DXMatrixTranslation(&MtxTrans, m_pDataTerrain->m_Pos.x, m_pDataTerrain->m_Pos.y, m_pDataTerrain->m_Pos.z);
 	D3DXMatrixMultiply(&MtxWorld, &MtxWorld, &MtxTrans);
 
 	m_pDevice->SetTransform(D3DTS_WORLD, &MtxWorld);				 //世界マトリックス
@@ -179,17 +168,16 @@ void CTerrain::Draw()
 	m_pDevice->SetIndices(m_pIdxBuff);								 //Indexバッファあげる
 	m_pDevice->SetFVF(FVF_VERTEX_3D);
 
-	CTexture *pTexture = CManager::GetTexture();
-
-	m_pDevice->SetTexture(0, pTexture->GetAddress(31));
-
+	m_pDevice->SetTexture(0, m_pDataTerrain->m_pTexture);
+	//m_pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);	//ワイヤーフレームモード
 	m_pDevice->DrawIndexedPrimitive(
 		D3DPT_TRIANGLELIST,
 		0,
 		0,
 		m_nNumVertices,
 		0,
-		m_nNumTriangles);								//Listモードでメッシュを描画
+		m_nNumTriangles);											//Listモードでメッシュを描画
+	//m_pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);		//SOLIDモードに戻す
 }
 
 bool CTerrain::FallCollider(CScene* pGameObject)
@@ -202,4 +190,58 @@ bool CTerrain::FallCollider(CScene* pGameObject)
 	{
 		return false;
 	}
+}
+
+void CWave::SetWave(float power, float fre, float speed, bool bDir)
+{
+	m_fPower = power;
+	m_fFrequency = fre;
+	m_fSpeed = speed;
+	m_DirX = bDir;
+	m_bWaveLine = true;
+}
+
+void CTerrain::WaveLineUpdate()
+{
+	VERTEX_3D *pVtx;												//頂点バッファ
+								
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);						// バッファロック
+
+	// ローカル変数宣言
+	int nIndex = 0;
+
+	for (int nCntRow = 0; nCntRow < m_nVertsPerCol; nCntRow++)		//Z頂点の巡り
+	{
+		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)	//X頂点の巡り
+		{
+			if (m_pWave->m_DirX)
+				pVtx[nIndex].pos.y +=
+				sinf(pVtx[nIndex].pos.x * m_pWave->m_fFrequency +
+					m_nCntTime * m_pWave->m_fSpeed) * m_pWave->m_fPower;
+			else
+				pVtx[nIndex].pos.y +=
+				sinf(pVtx[nIndex].pos.z * m_pWave->m_fFrequency +
+					m_nCntTime * m_pWave->m_fSpeed) * m_pWave->m_fPower;
+			nIndex++;
+		}
+	}
+	// バッファアンロック
+	m_pVtxBuff->Unlock();
+}
+
+void CTerrain::TerrainMove()
+{
+	VERTEX_3D *pVtx;												//頂点バッファ
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);						// バッファロック
+	int nIndex = 0;													// ローカル変数宣言
+	for (int nCntRow = 0; nCntRow < m_nVertsPerCol; nCntRow++)		//Z頂点の巡り
+	{
+		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)	//X頂点の巡り
+		{
+			pVtx[nIndex].tex.x += TERRAIN_MOVE_SPEED;
+			nIndex++;
+		}
+	}
+	// バッファアンロック
+	m_pVtxBuff->Unlock();
 }

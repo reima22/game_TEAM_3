@@ -252,6 +252,9 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>ソース ファイル\02_Draw\3D</Filter>
     </ClCompile>
+    <ClCompile Include="textdata_terrain.cpp">
+      <Filter>ソース ファイル\00_Sytsem\00_Resources\Textdata</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bg.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>ヘッダー ファイル\02_Draw\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="textdata_Terrain.h">
+      <Filter>ヘッダー ファイル\00_System\00_Resources\Textdata</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

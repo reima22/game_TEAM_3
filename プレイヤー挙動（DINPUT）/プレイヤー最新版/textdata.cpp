@@ -12,6 +12,7 @@
 #include "textdata_object.h"
 #include "textdata_texture.h"
 #include "textdata_pause.h"
+#include "textdata_Terrain.h"
 #include "stdio.h"
 
 // 静的メンバ変数宣言
@@ -23,13 +24,14 @@ char *CTextData::m_pFileName[TEXTDATA_MAX] =
 	{ "data/TEXT/objectdata.txt" },	// 3Dオブジェクトデータ
 	{ "data/TEXT/texturedata.txt" },	// テクスチャデータ
 	{ "data/TEXT/pausedata.txt" },		// ポーズポリゴン情報
+	{ "data/TEXT/TerrainData.txt"},			
 };
 
 CTextDataPlayer *CTextData::m_pDataPlayer = NULL;
 CTextDataObject *CTextData::m_pDataObject = NULL;
 CTextDataTexture *CTextData::m_pDataTexture = NULL;
 CTextDataPause *CTextData::m_pDataPause = NULL;
-
+CTextDataTerrain *CTextData::m_pDataTerrain = NULL;
 //==============================================================================
 // コンストラクタ
 //==============================================================================
@@ -81,6 +83,9 @@ void CTextData::LoadTextAll(void)
 
 	// ポーズデータの生成
 	m_pDataPause = CTextDataPause::Create();
+
+	// 地形データの生成
+	m_pDataTerrain = CTextDataTerrain::Create();
 
 	// ルールのデータ読み込み
 	CTextDataSystem::LoadData();
