@@ -49,7 +49,9 @@ public:
 		m_nDrawTriRemainder(0),
 		m_nCntTime(0),
 		m_fTerrainWidth(0),
-		m_fTerrainDepth(0) {};
+		m_fTerrainDepth(0),
+		m_ValidZoneMin(D3DXVECTOR3(0, 0, 0)),
+		m_ValidZoneMax(D3DXVECTOR3(0, 0, 0)) {};
 	~CTerrain()
 	{
 		if (m_pDevice != nullptr)
@@ -108,5 +110,7 @@ private:
 	unsigned int m_nCntTime;
 	float m_fTerrainWidth;				//地形の幅
 	float m_fTerrainDepth;				//地形の深さ
+	D3DXVECTOR3 m_ValidZoneMin;			//地形の範囲の最小値
+	D3DXVECTOR3 m_ValidZoneMax;			//地形の範囲の最大値
 };
 #endif

@@ -51,6 +51,12 @@ HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 	float fStartZ = -m_fTerrainDepth / 2.0f;		  //zÀ•W‚ÌŽn“_
 	float fCoordU = 0.0f;
 	float fCoordV = 0.0f;
+
+	m_ValidZoneMin.x = fStartX;
+	m_ValidZoneMin.z = fStartZ;
+	m_ValidZoneMax.x = -fStartX;
+	m_ValidZoneMax.z = -fStartZ;
+
 	if (m_nVertsPerRow != m_nVertsPerCol)
 	{
 		if (m_nVertsPerRow > m_nVertsPerCol)
@@ -182,14 +188,17 @@ void CTerrain::Draw()
 
 bool CTerrain::FallCollider(CScene* pGameObject)
 {
-	if (pGameObject->GetPosition().y <= TERRAIN_HEIGHT)
+	if (pGameObject->GetPosition().x > m_ValidZoneMax.x || 
+		pGameObject->GetPosition().z > m_ValidZoneMax.z || 
+		pGameObject->GetPosition().x < m_ValidZoneMin.x ||
+		pGameObject->GetPosition().x < m_ValidZoneMin.x)
 	{
-		return true;
+		if (pGameObject->GetPosition().y <= TERRAIN_HEIGHT)
+			return true;
+		else
+			return false;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 void CWave::SetWave(float power, float fre, float speed, bool bDir)
