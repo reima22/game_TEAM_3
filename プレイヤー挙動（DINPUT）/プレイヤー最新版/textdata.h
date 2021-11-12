@@ -17,7 +17,7 @@ class CTextDataPlayer;		// プレイヤーデータクラス
 class CTextDataObject;		// オブジェクトデータクラス
 class CTextDataTexture;		// テクスチャデータクラス
 class CTextDataPause;		// ポーズデータクラス
-
+class CTextDataTerrain;
 //==============================================================================
 // テキスト管理クラス
 //==============================================================================
@@ -33,6 +33,7 @@ public:
 		TEXTDATA_OBJECT,		// 3Dオブジェクトデータ
 		TEXTDATA_TEXTURE,		// テクスチャデータ
 		TEXTDATA_PAUSE,			// ポーズデータ
+		TEXTDATA_TERRAIN,		// 地形データ
 		TEXTDATA_MAX
 	}TEXTDATA;
 
@@ -48,13 +49,14 @@ public:
 	static CTextDataObject *GetDataObject(void) { return m_pDataObject; }
 	static CTextDataTexture *GetDataTexture(void) { return m_pDataTexture; }
 	static CTextDataPause *GetDataPause(void) { return m_pDataPause; }
-
+	static CTextDataTerrain *GetDataTerrain(void) { return m_pDataTerrain; }
 protected:
 	static char *m_pFileName[TEXTDATA_MAX];		// 読み込むファイル名パス
 	static CTextDataPlayer *m_pDataPlayer;		// プレイヤーデータ
 	static CTextDataObject *m_pDataObject;		// オブジェクトデータ
 	static CTextDataTexture *m_pDataTexture;	// テクスチャデータ
 	static CTextDataPause *m_pDataPause;		// ポーズデータ
+	static CTextDataTerrain *m_pDataTerrain;
 };
 
 #endif
