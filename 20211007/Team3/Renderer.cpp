@@ -7,7 +7,7 @@
 #include "renderer.h"
 #include "manager.h"
 #include "camera.h"
-
+#include "fade.h"
 //*****************************************************************************
 // レンダラークラス (基本)
 //*****************************************************************************
@@ -158,6 +158,9 @@ void CRenderer::Draw(void)
 		// すべてのオブジェクトの描画
 		CScene::DrawAll();
 
+		// フェードの描画
+		CManager::GetFade()->Draw();
+		
 		// Direct3Dによる描画の終了
 		m_pD3DDevice->EndScene();
 	}

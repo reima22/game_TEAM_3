@@ -88,6 +88,12 @@ HRESULT CScene2D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 size)
 //=============================================================================
 void CScene2D::Uninit(void)
 {
+	//// テクスチャを開放
+	//if (m_pTexture != NULL) {
+	//	m_pTexture->Release();
+	//	m_pTexture = NULL;
+	//}
+
 	// 頂点バッファを開放
 	if (m_pVtxBuff != NULL)
 	{
@@ -104,7 +110,17 @@ void CScene2D::Uninit(void)
 //=============================================================================
 void CScene2D::Update(void)
 {
+	// 頂点バッファをロックしてポインタ取得
+	m_pVtxBuff->Lock(0, 0, (void**)&m_pVertex, 0);
 
+	// 位置
+	m_pVertex[0].pos = D3DXVECTOR3(-GetSize().x + GetPos().x, GetSize().y + GetPos().y, 0.0f);
+	m_pVertex[1].pos = D3DXVECTOR3(-GetSize().x + GetPos().x, -GetSize().y + GetPos().y, 0.0f);
+	m_pVertex[2].pos = D3DXVECTOR3(GetSize().x + GetPos().x, GetSize().y + GetPos().y, 0.0f);
+	m_pVertex[3].pos = D3DXVECTOR3(GetSize().x + GetPos().x, -GetSize().y + GetPos().y, 0.0f);
+
+	// 頂点バッファアンロック
+	m_pVtxBuff->Unlock();
 }
 
 //=============================================================================

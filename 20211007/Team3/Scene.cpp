@@ -77,7 +77,7 @@ void CScene::Draw(void)
 void CScene::ReleaseAll(void)
 {
 	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
-		for (int i = 0; 0 < m_aSceneVc[nCntPriority].size();) {
+		for (int i = 0; 0 < (signed)m_aSceneVc[nCntPriority].size();) {
 			if (m_aSceneVc[nCntPriority][i] != NULL) {
 				m_aSceneVc[nCntPriority][i]->Uninit();
 			}

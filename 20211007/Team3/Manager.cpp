@@ -12,10 +12,12 @@
 #include "GameScene.h"
 #include "select.h"
 #include "Input.h"
+#include "fade.h"
 
 //*****************************************************************************
 // 静的メンバ変数
 //*****************************************************************************
+CManager::MODE CManager::m_mode;
 CRenderer *CManager::m_pRenderer = NULL;
 CCamera *CManager::m_pCamera = NULL;
 CLight *CManager::m_pLight = NULL;
@@ -24,6 +26,7 @@ CInputMouse *CManager::m_pInputMouse = NULL;
 CResourceManager *CManager::m_pResourceManager = NULL;
 CGameScene *CManager::m_pGameScene = NULL;
 CStageSelect *CManager::m_pStage = NULL;
+CFade *CManager::m_pFade = NULL;
 
 //*****************************************************************************
 // マネージャクラス
@@ -92,17 +95,15 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 		return E_FAIL;
 	}
 
-	// とりあえずゲームシーン置いとく
-	//m_pGameScene = new CGameScene;
-	//if (FAILED(m_pGameScene->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO)))
-	//{
-	//	return E_FAIL;
-	//}
-
-	m_pStage = new CStageSelect;
-	if (FAILED(m_pStage->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO))) {
+	// フェードクラス生成
+	m_pFade = new CFade;
+	if (FAILED(m_pFade->Init())) {
 		return E_FAIL;
 	}
+
+	m_pFade->FadeIN();
+	SetMode(MODE_SELECT);
+
 
 	return S_OK;
 }
@@ -114,6 +115,13 @@ void CManager::Uninit(void)
 {
 	// オブジェクトをすべて破棄
 	CScene::ReleaseAll();
+
+	// フェード破棄
+	if (m_pFade != NULL) {
+		m_pFade->Uninit();
+		delete m_pFade;
+		m_pFade = NULL;
+	}
 
 	// リソースマネージャ破棄
 	if (m_pResourceManager != NULL)
@@ -199,6 +207,12 @@ void CManager::Update(void)
 	{
 		m_pRenderer->Update();
 	}
+
+	// フェードの更新
+	if (m_pFade != NULL) {
+		m_pFade->Update();
+	}
+
 }
 
 //=============================================================================
@@ -210,5 +224,60 @@ void CManager::Draw(void)
 	if (m_pRenderer != NULL)
 	{
 		m_pRenderer->Draw();
+	}
+}
+
+//=============================================================================
+// モードの設定
+//=============================================================================
+void CManager::SetMode(MODE mode)
+{
+	// 現在モードの破棄
+	switch (m_mode)
+	{
+	case MODE_SELECT:
+		if (m_pStage != NULL)
+		{
+			m_pStage->Uninit();
+			m_pStage = NULL;
+		}
+		break;
+
+	case MODE_GAME:
+		if (m_pGameScene != NULL)
+		{
+			m_pGameScene->Uninit();
+			m_pGameScene = NULL;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	// 全オブジェクトの開放
+	CScene::ReleaseAll();
+
+	// 指定モードの生成
+	m_mode = mode;
+	switch (mode)
+	{
+	case MODE_SELECT:
+		m_pStage = new CStageSelect;
+		if (m_pStage != NULL)
+		{
+			m_pStage->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO);
+		}
+		break;
+
+	case MODE_GAME:
+		m_pGameScene = new CGameScene;
+		if (m_pGameScene != NULL)
+		{
+			m_pGameScene->Init(VECTOR3_ZERO, VECTOR3_ZERO, VECTOR3_ZERO);
+		}
+		break;
+	default:
+		break;
 	}
 }

@@ -5,5 +5,9 @@ TextureAddress
 
 #START
 TexTest01			Data/Texture/Tex001.jpg
-
+Stage1				Data/Texture/1.png
+Stage2				Data/Texture/2.png
+Stage3				Data/Texture/3.png
+Arrow				Data/Texture/arrow.png
+StageText			Data/Texture/stageselect.png
 #END

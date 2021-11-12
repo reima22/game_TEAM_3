@@ -1,43 +1,58 @@
 //=============================================================================
 //
-// レンダリング [renderer.h]
+// フェード処理 [fade.h]
 // Author: Sota Tomoe
 //
 //=============================================================================
-#ifndef _RENDERER_H_
-#define _RENDERER_H_
+#ifndef _FADE_H_
+#define _FADE_H_
 
 //*****************************************************************************
-// ヘッダのインクルード
+// ヘッダーのインクルード
 //*****************************************************************************
 #include "main.h"
-#include "scene.h"
+#include "scene2D.h"
+#include "manager.h"
 
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define FADE_SPEED (0.02f)
 
 //*****************************************************************************
-// レンダラークラス
+// フェードクラス
 //*****************************************************************************
-class CRenderer
+class CFade
 {
 public:
-	CRenderer();
-	~CRenderer();
+	// フェードの状態
+	typedef enum
+	{
+		FADE_NONE = 0,
+		FADE_IN,
+		FADE_OUT,
 
-	HRESULT Init(HWND hWnd, BOOL bWindow);
+		FADE_MAX,
+	} FADE;
+
+	CFade();
+	~CFade();
+	
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	LPDIRECT3DDEVICE9 GetDevice(void) { return m_pD3DDevice; }
+	void FadeIN(void);
+	void FadeOUT(CManager::MODE modeNext);
 
 private:
-	void DrawFPS(void);
-
-	LPDIRECT3D9 m_pD3D;				// Direct3Dオブジェクト
-	LPDIRECT3DDEVICE9 m_pD3DDevice;	// デバイスオブジェクト
-	LPD3DXFONT m_pFont;
+	LPDIRECT3DTEXTURE9 m_pTexture;			// テクスチャへのポインタ
+	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファへのポインタ
+	CScene2D::VERTEX_2D *m_pVertex;			// 2Dポリゴンのポインタ
+	float m_fAlpha;							// 透明度
+	CManager::MODE m_modeNext;				// 次のモード
+	FADE m_fadeState;						// フェードの状態
 };
+
 #endif
