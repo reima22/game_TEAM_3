@@ -1,0 +1,75 @@
+#----------------------------------------------------------------------------------------------------
+#
+# テクスチャファイル名パス一覧
+# Author : Mare Horiai
+#
+#----------------------------------------------------------------------------------------------------
+SCRIPT
+
+#----------------------------------------------------------------------------------------------------
+# テクスチャの数
+#----------------------------------------------------------------------------------------------------
+NUM_TEXTURE = 45
+
+#----------------------------------------------------------------------------------------------------
+# テクスチャファイル名
+#----------------------------------------------------------------------------------------------------
+TEXTURE_FILENAME = data\TEXTURE\player_cloth00.jpg 		# [0]プレイヤーテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\player_cloth01.jpg 		# [1]プレイヤーテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\block.jpg				# [2]ブロック
+TEXTURE_FILENAME = data\TEXTURE\title_bg.png			# [3]タイトル背景
+TEXTURE_FILENAME = data\TEXTURE\title000.png			# [4]タイトルロゴ
+TEXTURE_FILENAME = data\TEXTURE\press_enter.png			# [5]タイトルエンターサイン
+TEXTURE_FILENAME = data\TEXTURE\result_bg.png			# [6]リザルト背景
+TEXTURE_FILENAME = data\TEXTURE\result_logo000.png		# [7]リザルトロゴ
+TEXTURE_FILENAME = data\TEXTURE\ranking_bg.png			# [8]ランキング背景
+TEXTURE_FILENAME = data\TEXTURE\ranking_logo.png		# [9]ランキングロゴ	
+TEXTURE_FILENAME = data\TEXTURE\ranking_rank.png		# [10]ランキング順位
+TEXTURE_FILENAME = data\TEXTURE\yourscore.png			# [11]ランキング画面のリザルトスコアロゴ
+TEXTURE_FILENAME = data\TEXTURE\number000.png			# [12]ナンバー
+TEXTURE_FILENAME = data\TEXTURE\explosion000.png		# [13]爆発
+TEXTURE_FILENAME = data\TEXTURE\effect000.jpg			# [14]エフェクト
+TEXTURE_FILENAME = data\TEXTURE\pause_BS.png			# [15]ポーズベース
+TEXTURE_FILENAME = data\TEXTURE\continue_logo.png		# [16]ポーズコンテニュー
+TEXTURE_FILENAME = data\TEXTURE\retry_logo.png			# [17]ポーズリトライ
+TEXTURE_FILENAME = data\TEXTURE\quit_logo.png			# [18]ポーズ終了
+TEXTURE_FILENAME = data\TEXTURE\tutorial00.jpg			# [19]チュートリアル0
+TEXTURE_FILENAME = data\TEXTURE\tutorial01.jpg			# [20]チュートリアル1
+TEXTURE_FILENAME = data\TEXTURE\tutorial02.jpg			# [21]チュートリアル2
+TEXTURE_FILENAME = data\TEXTURE\window_effect.png		# [22]画面エフェクト
+TEXTURE_FILENAME = data\TEXTURE\easy.png				# [23]easy
+TEXTURE_FILENAME = data\TEXTURE\normal.png				# [24]normal
+TEXTURE_FILENAME = data\TEXTURE\hard.png				# [25]hard
+TEXTURE_FILENAME = data\TEXTURE\meteor.jpg				# [26]隕石モデルのテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\panel.jpg				# [27]パネルモデルのテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex001.jpg				# [28]足場モデルのテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex002.jpg				# [29]足場モデルのテクスチャ
+TEXTURE_FILENAME = data\TEXTURE\shadow000.jpg			# [30]丸影テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Lava.png				# [31]溶岩テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex000.jpg				# [32]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex001.jpg				# [33]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex002.jpg				# [34]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex003.jpg				# [35]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex004.jpg				# [36]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex005.jpg				# [37]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\Tex006.jpg				# [38]テクスチャ
+TEXTURE_FILENAME = data\TEXTURE\ui_time.png				# [39]タイマーロゴ
+TEXTURE_FILENAME = data\TEXTURE\ui_fall.png				# [40]落下数ロゴ
+TEXTURE_FILENAME = data\TEXTURE\go.png					# [41]GO
+TEXTURE_FILENAME = data\TEXTURE\one.png					# [42]1
+TEXTURE_FILENAME = data\TEXTURE\two.png					# [43]2
+TEXTURE_FILENAME = data\TEXTURE\three.png				# [44]3
+
+#-----------------------------
+# 指定のテクスチャ
+#-----------------------------
+# 数値テクスチャ
+NUMTEX = 12
+
+# 丸影テクスチャ
+SHADOWTEX = 30
+
+# エフェクトテクスチャ
+EFFECTTEX = 14
+
+END_SCRIPT
