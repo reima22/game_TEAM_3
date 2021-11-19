@@ -30,6 +30,7 @@ HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 {
 	// 地形データの取得
 	CTextDataTerrain* pTerrain = CTextDataTerrain::GetDataTerrain();
+	m_type = nType;
 	int nTypeID = nType;
 	m_pDataTerrain = pTerrain->GetTerrain(nTypeID);
 	m_nVertsPerRow = m_pDataTerrain->m_nCellsPerRow + 1;

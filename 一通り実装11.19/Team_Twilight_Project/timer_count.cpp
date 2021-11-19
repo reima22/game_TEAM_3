@@ -11,6 +11,7 @@
 #include "number.h"
 #include "texture.h"
 #include "timer_count.h"
+#include "select.h"
 
 // 静的メンバ変数宣言
 int CTimerCount::m_nTimerResult = 0;	// リザルトへ引き継ぐ値
@@ -40,6 +41,8 @@ CTimerCount::~CTimerCount()
 //==============================================================================
 HRESULT CTimerCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
+	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
+
 	// タイマー設定
 	m_nTimer = 60;
 
@@ -48,6 +51,15 @@ HRESULT CTimerCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 	{
 		m_apNumber[nCntDigit] = CNumber::Create(
 			D3DXVECTOR3(pos.x + (nCntDigit * (size.x * 2)), pos.y, 0.0f), size);
+
+		if (select == CStageSelect::STAGE_SELECT_2)
+		{
+			m_apNumber[nCntDigit]->SetCol(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+		}
+		else
+		{
+			m_apNumber[nCntDigit]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 
 	return S_OK;

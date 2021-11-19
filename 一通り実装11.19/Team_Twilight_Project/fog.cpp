@@ -97,9 +97,6 @@ void CFog::Draw(void)
 	// バーテックスフォグの使用(線形公式)
 	pDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
 
-	float FogStart = 100.0f;	// フォグの開始点
-	float FogEnd = 1200.0f;		// フォグの終了点
-
 	pDevice->SetRenderState(D3DRS_FOGSTART, *((LPDWORD)(&m_fFogStart)));	
 	pDevice->SetRenderState(D3DRS_FOGEND, *((LPDWORD)(&m_fFogEnd)));		
 

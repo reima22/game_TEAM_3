@@ -21,6 +21,7 @@ CSound::PARAM CSound::m_aParam[CSound::SOUND_LABEL_MAX] =
 	{"data/SE/decide.wav", 0},			// 決定音
 	{"data/SE/dive00.wav", 0},			// ダイブ音0
 	{"data/SE/dive01.wav", 0},			// ダイブ音1
+	{"data/SE/dive02.wav", 0},			// ダイブ音2
 	{"data/SE/savepoint.wav", 0},		// 中間地点着地音
 	{"data/SE/cntdown.wav", 0},			// カウントダウン音	
 	{"data/SE/count.wav", 0},			// カウント音

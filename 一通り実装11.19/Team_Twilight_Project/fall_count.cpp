@@ -11,6 +11,7 @@
 #include "number.h"
 #include "texture.h"
 #include "fall_count.h"
+#include "select.h"
 
 // Ã“Iƒƒ“ƒo•Ï”
 int CFallCount::m_nFallResult = 0;
@@ -40,6 +41,8 @@ CFallCount::~CFallCount()
 //==============================================================================
 HRESULT CFallCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
+	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
+
 	// —Ž‰º”Ý’è
 	m_nFall = 0;
 
@@ -47,6 +50,15 @@ HRESULT CFallCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 	{
 		m_apNumber[nCntDigit] = CNumber::Create(
 			D3DXVECTOR3(pos.x + (nCntDigit * (size.x * 2)), pos.y, 0.0f), size);
+
+		if (select == CStageSelect::STAGE_SELECT_2)
+		{
+			m_apNumber[nCntDigit]->SetCol(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+		}
+		else
+		{
+			m_apNumber[nCntDigit]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 
 	return S_OK;

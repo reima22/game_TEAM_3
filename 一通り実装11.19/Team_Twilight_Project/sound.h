@@ -28,6 +28,7 @@ public:
 		SOUND_LABEL_SE_DECIDE,			// 決定音
 		SOUND_LABEL_SE_DIVE00,			// ダイブ音0
 		SOUND_LABEL_SE_DIVE01,			// ダイブ音1
+		SOUND_LABEL_SE_DIVE02,			// ダイブ音2
 		SOUND_LABEL_SE_SAVEPOINT,		// 中間地点着地音
 		SOUND_LABEL_SE_CNTDOWN,			// カウントダウン音
 		SOUND_LABEL_SE_COUNT,			// 数値カウント音

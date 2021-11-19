@@ -136,6 +136,10 @@ void CShadowS::Draw(void)
 	D3DXMATRIX mtx = m_pSceneX->GetMatrix();
 
 
+
+	// フォグを有効化
+	pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
+
 	// ワールドマトリックスの初期化
 	D3DXMatrixIdentity(&mtx);
 
@@ -246,6 +250,9 @@ void CShadowS::Draw(void)
 
 	// ステンシルテストを無効にする
 	pDevice->SetRenderState(D3DRS_STENCILENABLE, FALSE);
+
+	// フォグを有効化
+	pDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
 }
 
 //==============================================================================

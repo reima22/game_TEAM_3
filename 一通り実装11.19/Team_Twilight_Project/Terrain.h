@@ -86,6 +86,7 @@ public:
 	bool FallCollider(CScene* pGameObject);//当たり判定関数
 	vector<D3DXVECTOR3> vVertexBuffer;				//頂点バッファのコピー
 	vector<int> vIndexBuffer;						//Indexバッファのコピー
+	CTerrainInfo::TERRAIN_TYPE GetType(void) { return m_type; }
 private:
 	void WaveLineUpdate();
 	void TerrainMove();
@@ -112,5 +113,6 @@ private:
 	float m_fTerrainDepth;				//地形の深さ
 	D3DXVECTOR3 m_ValidZoneMin;			//地形の範囲の最小値
 	D3DXVECTOR3 m_ValidZoneMax;			//地形の範囲の最大値
+	CTerrainInfo::TERRAIN_TYPE m_type;
 };
 #endif

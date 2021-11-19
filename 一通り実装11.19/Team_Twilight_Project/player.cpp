@@ -218,7 +218,14 @@ void CPlayer::MovePlayer(void)
 			m_move = VECTOR3_NULL;
 			m_nDashCnt = 0;
 
-			m_pSound->Play(CSound::SOUND_LABEL_SE_DIVE00);
+			if (pTerrain->GetType() == CTerrainInfo::TERRAIN_OCEAN)
+			{
+				m_pSound->Play(CSound::SOUND_LABEL_SE_DIVE02);
+			}
+			else if (pTerrain->GetType() == CTerrainInfo::TERRAIN_LAVA)
+			{
+				m_pSound->Play(CSound::SOUND_LABEL_SE_DIVE00);
+			}			
 
 			// —Ž‰º”‰ÁŽZ
 			pFall->GetFallCount()->AddFall(1);

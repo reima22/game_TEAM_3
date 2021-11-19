@@ -31,6 +31,8 @@ public:
 	float GetFogStart(void) { return m_fFogStart; }
 	float GetFogEnd(void) { return m_fFogEnd; }
 
+	void SetFogCol(D3DXCOLOR col) { m_col = col; }
+
 private:
 	float m_fFogStart = 0.0f;		// フォグの開始
 	float m_fFogEnd = 0.0f;		// フォグ終了の距離（完全に見えなくなる）

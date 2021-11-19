@@ -60,5 +60,4 @@ TEXTURE_FILENAME = data\TEXTURE\minus.png			MINUS				# [42]―マーク
 TEXTURE_FILENAME = data\TEXTURE\multi.png			MULTI				# [43]×マーク
 TEXTURE_FILENAME = data\TEXTURE\equal.png			EQUAL				# [44]＝マーク
 
-
 END_SCRIPT

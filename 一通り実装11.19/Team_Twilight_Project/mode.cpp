@@ -23,7 +23,7 @@ CGame *CMode::m_pGame = NULL;					// ゲームモード
 CResult *CMode::m_pResult = NULL;				// リザルトモード
 CRanking *CMode::m_pRanking = NULL;				// ランキングモード
 CStageSelect *CMode::m_pStageSelect = NULL;		// ステージセレクトモード
-CMode::MODE CMode::m_mode = MODE_GAME;			// 現在のゲームモード
+CMode::MODE CMode::m_mode = MODE_TITLE;			// 現在のゲームモード
 
 //==============================================================================
 // コンストラクタ

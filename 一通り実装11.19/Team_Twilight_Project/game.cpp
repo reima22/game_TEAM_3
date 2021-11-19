@@ -89,9 +89,6 @@ HRESULT CGame::Init(void)
 
 	// ビルボードの配置
 	//CSceneBillboard::Create(VECTOR3_NULL);
-
-	// フォグの生成
-	m_pFog = CFog::Create();
 	
 	return S_OK;
 }
@@ -249,6 +246,10 @@ void CGame::SetStageObject(void)
 		m_pMeshField[nCntMesh] = CMeshfield::Create(nCntMesh);
 	}
 
+
+	// フォグの生成
+	m_pFog = CFog::Create();
+
 	// データテキストの取得
 	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
 
@@ -280,15 +281,21 @@ void CGame::SetStageObject(void)
 		}
 
 		break;
+
 	case CStageSelect::STAGE_SELECT_2:
-		
+
 		// BGMの生成
 		if (m_pSound != NULL && CManager::GetBGMPlay(CSound::BGMTYPE_GAME) == true)
 		{
 			m_pSound->Play(CSound::SOUND_LABEL_BGM003);
 		}
 
+		m_pTerrain = CTerrain::Create(CTerrainInfo::TERRAIN_TYPE::TERRAIN_OCEAN);
+
+		m_pFog->SetFogCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+
 		break;
+
 	case CStageSelect::STAGE_SELECT_3:
 		
 		// BGMの生成
@@ -298,6 +305,7 @@ void CGame::SetStageObject(void)
 		}
 
 		m_pTerrain = CTerrain::Create(CTerrainInfo::TERRAIN_TYPE::TERRAIN_LAVA);
+
 		break;
 	}
 }

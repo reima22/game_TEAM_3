@@ -105,8 +105,6 @@ void CResultScoreEx::Update(void)
 	//// スコアの設定
 	//m_pScore->SetScore(m_nScore);
 
-
-
 	// スコアの設定
 	SetScoreEx(m_nScoreEx);
 }
@@ -216,7 +214,9 @@ void CResultScoreEx::ShffleNum(int nType)
 	}
 }
 
+//==============================================================================
 // 色の設定
+//==============================================================================
 void CResultScoreEx::SetCol(D3DXCOLOR col)
 {
 	// 色の反映

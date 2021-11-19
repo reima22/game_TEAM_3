@@ -118,6 +118,8 @@ void CFade::Update(void)
 
 	// 色の設定
 	m_pPolygon->SetCol(m_col);
+
+
 }
 
 //==============================================================================
@@ -125,10 +127,21 @@ void CFade::Update(void)
 //==============================================================================
 void CFade::Draw(void)
 {
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice;
+
+	pDevice = CManager::GetRenderer()->GetDevice();
+
+	// フォグを無効化
+	pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
+
 	if (m_pPolygon != NULL)
 	{
 		m_pPolygon->Draw();
 	}
+
+	// フォグを有効化
+	pDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
 }
 
 //==============================================================================

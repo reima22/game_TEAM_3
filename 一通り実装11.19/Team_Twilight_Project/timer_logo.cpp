@@ -12,6 +12,7 @@
 #include "texture.h"
 //#include "timer_count.h"
 #include "timer_logo.h"
+#include "select.h"
 
 //==============================================================================
 // コンストラクタ
@@ -34,6 +35,9 @@ CTimerLogo::~CTimerLogo()
 //==============================================================================
 HRESULT CTimerLogo::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
+	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
+
+
 	// 2Dポリゴンを生成
 	m_pScene2D = CScene2D::Create();
 
@@ -47,7 +51,16 @@ HRESULT CTimerLogo::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 
 		// テクスチャ設定
 		m_pScene2D->BindTexture("TIMER_LOGO");
-		m_pScene2D->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+		if (select == CStageSelect::STAGE_SELECT_2)
+		{
+			m_pScene2D->SetCol(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+		}
+		else
+		{
+			m_pScene2D->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+		
 		m_pScene2D->SetTex(1, 1, 0, 0, 0, 0);
 	}
 
