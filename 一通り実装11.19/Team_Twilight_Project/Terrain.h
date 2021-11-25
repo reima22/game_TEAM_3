@@ -13,18 +13,30 @@
 class CWave
 {
 public:
+	typedef enum
+	{
+		WAVE_LINE = 0,
+		WAVE_WATERSURFACE,
+		WAVE_MAX
+	}WAVE_TYPE;
 	CWave() :
 		m_bWaveLine(false),
+		m_bWaterSurface(false),
 		m_DirX(false),
 		m_fPower(0),
 		m_fFrequency(0),
-		m_fSpeed(0) {};
-	void SetWave(float power, float fre, float speed, bool bDir);
+		m_fSpeed(0),
+		m_fStartPosY(0) {};
+	void SetWaveLine(float power, float fre, float speed, bool bDir);
+	void SetWaterSurface(float power, float fre, float speed);
 	bool m_bWaveLine;
+	bool m_bWaterSurface;
 	bool m_DirX;
 	float m_fPower;
 	float m_fFrequency;
 	float m_fSpeed;
+	float m_fStartPosY;
+	static const int EffectRange = 5;
 };
 //*******************************************************************
 //地形クラス
@@ -45,8 +57,6 @@ public:
 		m_nCells(0),
 		m_nNumTriangles(0),
 		m_nNumIndex(0),
-		m_nDrawBlock(0),
-		m_nDrawTriRemainder(0),
 		m_nCntTime(0),
 		m_fTerrainWidth(0),
 		m_fTerrainDepth(0),
@@ -84,11 +94,12 @@ public:
 	void Update();						//更新
 	void Draw();						//地形の描画
 	bool FallCollider(CScene* pGameObject);//当たり判定関数
+	CTerrainInfo::TERRAIN_TYPE GetType(void) { return m_type; }
 	vector<D3DXVECTOR3> vVertexBuffer;				//頂点バッファのコピー
 	vector<int> vIndexBuffer;						//Indexバッファのコピー
-	CTerrainInfo::TERRAIN_TYPE GetType(void) { return m_type; }
 private:
 	void WaveLineUpdate();
+	void WaterSurfaceUpdate();
 	void TerrainMove();
 	const int MAX_PRIMITIVE_COUNT = 60000;			//描画出来る最大値
 	const int TERRAIN_HEIGHT = 0;					//地形の高さ
@@ -106,13 +117,16 @@ private:
 	unsigned int m_nCells;				//セル数
 	unsigned int m_nNumTriangles;		//描画三角形数
 	unsigned int m_nNumIndex;			//Indexの番号
-	unsigned int m_nDrawBlock;
-	unsigned int m_nDrawTriRemainder;
-	unsigned int m_nCntTime;
+	unsigned int m_nCntTime;			//時間count
 	float m_fTerrainWidth;				//地形の幅
 	float m_fTerrainDepth;				//地形の深さ
 	D3DXVECTOR3 m_ValidZoneMin;			//地形の範囲の最小値
 	D3DXVECTOR3 m_ValidZoneMax;			//地形の範囲の最大値
 	CTerrainInfo::TERRAIN_TYPE m_type;
+};
+
+class CWaterSurface : public CTerrain
+{
+
 };
 #endif

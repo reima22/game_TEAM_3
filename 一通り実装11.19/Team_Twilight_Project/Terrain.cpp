@@ -39,12 +39,22 @@ HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 	m_nCells = m_pDataTerrain->m_nCellsPerRow * m_pDataTerrain->m_nCellsPerCol;
 	m_nNumTriangles = m_nCells * 2;
 	m_nNumIndex = m_nCells * 6;
-	m_nDrawBlock = m_nNumTriangles / MAX_PRIMITIVE_COUNT;
-	m_nDrawTriRemainder = m_nNumIndex % MAX_PRIMITIVE_COUNT;
 	m_fTerrainWidth = m_pDataTerrain->m_nCellsPerRow * m_pDataTerrain->m_fCellSpacing;
 	m_fTerrainDepth = m_pDataTerrain->m_nCellsPerCol * m_pDataTerrain->m_fCellSpacing;
 
-	m_pWave->SetWave(m_pDataTerrain->m_W_fPower, m_pDataTerrain->m_W_fFrequency, m_pDataTerrain->m_W_fSpeed, m_pDataTerrain->m_W_dirX);
+	if (nTypeID == CTerrainInfo::TERRAIN_VALLEY)
+	{
+
+	}
+	else if (nTypeID == CTerrainInfo::TERRAIN_OCEAN)
+		m_pWave->SetWaterSurface(m_pDataTerrain->m_W_fPower,
+			m_pDataTerrain->m_W_fFrequency,
+			m_pDataTerrain->m_W_fSpeed);
+	else if (nTypeID == CTerrainInfo::TERRAIN_LAVA)
+		m_pWave->SetWaveLine(m_pDataTerrain->m_W_fPower,
+			m_pDataTerrain->m_W_fFrequency,
+			m_pDataTerrain->m_W_fSpeed,
+			m_pDataTerrain->m_W_dirX);
 
 	WORD* pIdx;										//Indexバッファ
 	VERTEX_3D *pVtx;								//頂点バッファ
@@ -101,8 +111,17 @@ HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 				(float)TERRAIN_HEIGHT,
 				(fStartX + nCntCol * m_pDataTerrain->m_fCellSpacing));
 			pVtx[nIndex].nor = D3DXVECTOR3(0.f, 1.f, 0.f);
-			pVtx[nIndex].col = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-			pVtx[nIndex].tex = D3DXVECTOR2(nCntCol * fCoordU, nCntRow * fCoordV);
+			if (nTypeID == CTerrainInfo::TERRAIN_OCEAN)
+			{
+				pVtx[nIndex].col = D3DXCOLOR(0.f, 1.f - nCntCol * fCoordU, 1.f, 1.f);
+				pVtx[nIndex].tex = D3DXVECTOR2(nCntCol * fCoordU, nCntRow * fCoordV);
+				pVtx[nIndex].tex *= 4.0f;
+			}
+			else
+			{
+				pVtx[nIndex].col = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+				pVtx[nIndex].tex = D3DXVECTOR2(nCntCol * fCoordU, nCntRow * fCoordV);
+			}
 			vVertexBuffer.push_back(pVtx[nIndex].pos);
 			nIndex++;
 		}
@@ -150,10 +169,12 @@ HRESULT CTerrain::Init(CTerrainInfo::TERRAIN_TYPE nType)
 void CTerrain::Update()
 {
 	m_nCntTime++;
-	TerrainMove();
+	//TerrainMove();
 
 	if (m_pWave->m_bWaveLine)
 		WaveLineUpdate();
+	else if (m_pWave->m_bWaterSurface)
+		WaterSurfaceUpdate();
 }
 
 //*******************************************************************
@@ -161,6 +182,7 @@ void CTerrain::Update()
 //*******************************************************************
 void CTerrain::Draw()
 {
+	//CManager::GetRenderer()->GetDevice()->SetRenderState(D3DRS_FOGENABLE, FALSE);
 	D3DXMATRIX MtxWorld;
 	D3DXMATRIX MtxRot, MtxTrans;	// Temporary matrices
 
@@ -202,13 +224,21 @@ bool CTerrain::FallCollider(CScene* pGameObject)
 	return false;
 }
 
-void CWave::SetWave(float power, float fre, float speed, bool bDir)
+void CWave::SetWaveLine(float power, float fre, float speed, bool bDir)
 {
 	m_fPower = power;
 	m_fFrequency = fre;
 	m_fSpeed = speed;
 	m_DirX = bDir;
 	m_bWaveLine = true;
+}
+
+void CWave::SetWaterSurface(float power, float fre, float speed)
+{
+	m_fPower = power;
+	m_fFrequency = fre;
+	m_fSpeed = speed;
+	m_bWaterSurface = true;
 }
 
 void CTerrain::WaveLineUpdate()
@@ -249,6 +279,34 @@ void CTerrain::TerrainMove()
 		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)	//X頂点の巡り
 		{
 			pVtx[nIndex].tex.x += TERRAIN_MOVE_SPEED;
+			nIndex++;
+		}
+	}
+	m_pWave->m_fStartPosY += TERRAIN_MOVE_SPEED;
+	// バッファアンロック
+	m_pVtxBuff->Unlock();
+}
+
+void CTerrain::WaterSurfaceUpdate()
+{
+	VERTEX_3D *pVtx;												//頂点バッファ
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);						// バッファロック
+	int nIndex = 0;													// ローカル変数宣言
+	for (int nCntRow = 0; nCntRow < m_nVertsPerCol; nCntRow++)		//Z頂点の巡り
+	{
+		for (int nCntCol = 0; nCntCol < m_nVertsPerRow; nCntCol++)	//X頂点の巡り
+		{
+			//abs(m_pWave->m_fStartPosY) * 2.0f / m_fTerrainDepth
+			D3DXVECTOR2 dv = D3DXVECTOR2(m_pWave->m_fStartPosY, pVtx[nIndex].tex.y) - pVtx[nIndex].tex;
+			//D3DXVECTOR2 dv = D3DXVECTOR2(0, 0) - pVtx[nIndex].tex;
+
+			float fDis = sqrtf(dv.x * dv.x + dv.y * dv.y);
+			float fPower = (m_pWave->m_fPower / m_pWave->EffectRange) * ((m_pWave->EffectRange - fDis) > 0.0f ? (m_pWave->EffectRange - fDis) : 0.0f);
+			float fsinFactor = sinf(fDis * m_pWave->m_fFrequency - m_nCntTime *  m_pWave->m_fSpeed) * 0.01f * fPower;
+			D3DXVECTOR2 dv1;
+			D3DXVec2Normalize(&dv1, &dv);
+			D3DXVECTOR2 offset = dv1 * fsinFactor;
+			pVtx[nIndex].tex.x += offset.x;
 			nIndex++;
 		}
 	}
