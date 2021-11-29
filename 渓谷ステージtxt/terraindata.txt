@@ -1,0 +1,50 @@
+################################
+Author:Yo jitaku
+TerrainData
+################################
+
+#START
+TERRAIN_NUM = 3
+
+#TERRAIN_SET
+	TEXTURE = Data/Texture/sea.png
+	TYPE = T_Valley
+	POS = 0 -500 1100
+	ROT = 0 0 0
+	COLUMN = 130
+	RAW = 460
+	SPACE = 10
+	WAVE_SPEED = 0.05f
+	WAVE_FREQUNENCY = 0.025f
+	WAVE_POWER = 0.15f
+	WAVE_DIRECTION = Z
+#END_TERRAIN_SET
+
+#TERRAIN_SET
+	TEXTURE = Data/Texture/sea.png
+	TYPE = T_Ocean
+	POS = 0 0 100
+	ROT = 0 0 0
+	COLUMN = 100
+	RAW = 320
+	SPACE = 10
+	WAVE_SPEED = 0.05f
+	WAVE_FREQUNENCY = 0.025f
+	WAVE_POWER = 0.15f
+	WAVE_DIRECTION = Z
+#END_TERRAIN_SET
+
+#TERRAIN_SET
+	TEXTURE = Data/Texture/Lava.png
+	TYPE = T_Lava
+	POS = 0 0 100
+	ROT = 0 0 0
+	COLUMN = 100
+	RAW = 320
+	SPACE = 10
+	WAVE_SPEED = 0.05f
+	WAVE_FREQUNENCY = 0.025f
+	WAVE_POWER = 0.15f
+	WAVE_DIRECTION = Z
+#END_TERRAIN_SET
+#END
