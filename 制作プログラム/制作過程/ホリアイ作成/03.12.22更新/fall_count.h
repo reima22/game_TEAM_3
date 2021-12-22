@@ -13,6 +13,8 @@
 
 // マクロ定義
 #define FALL_DIGIT_NUM	(3)	// 最大桁数
+#define FALL_COUNT_POS		(D3DXVECTOR3(1160.0f, 50.0f, 0.0f))	// カウントの位置
+#define FALL_COUNT_SIZE		(D3DXVECTOR2(20.0f, 40.0f))			// カウント1桁分のサイズ
 
 // 前方宣言
 class CNumber;
@@ -37,7 +39,9 @@ public:
 	void SetNumber(int nFall);
 
 	// 落下数の加算
-	void AddFall(int nAdd) { m_nFall += nAdd; }
+	void AddFall(int nAdd);
+
+	void SizeReturn(void);	// サイズ戻す
 
 	// リザルトへの継承
 	static int GetFallNum(void) { return m_nFallResult; }

@@ -61,7 +61,7 @@ HRESULT CUi::Init(void)
 	// 開始時カウントダウンの生成
 	if (m_pStartCntdown == NULL)
 	{
-		m_pStartCntdown = CStartCntdown::Create(SCREEN_CENTER, START_CNT_SIZE);
+		m_pStartCntdown = CStartCntdown::Create();
 	}
 
 	// チェックポイントロゴ

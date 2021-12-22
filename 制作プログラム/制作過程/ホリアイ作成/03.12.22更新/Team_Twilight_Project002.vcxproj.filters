@@ -133,11 +133,14 @@
     <Filter Include="ヘッダー ファイル\01_Scene\02_Game\01_UI\99_other">
       <UniqueIdentifier>{d20a76a1-5c1a-471a-a4af-6141e1f25ffa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\00_System\99_other">
+      <UniqueIdentifier>{32c476a8-aa9f-41cd-b73c-0fb429f3e464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\00_System\99_other">
+      <UniqueIdentifier>{53e820b0-5db6-4927-9a17-8bead22d0521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bg.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
     <ClCompile Include="bonus.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\02_Bonus</Filter>
     </ClCompile>
@@ -147,20 +150,11 @@
     <ClCompile Include="bonus_logo.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\02_Bonus</Filter>
     </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
     <ClCompile Include="checkpoint_logo.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\99_other</Filter>
     </ClCompile>
-    <ClCompile Include="debugproc.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
     <ClCompile Include="effect.cpp">
       <Filter>ソース ファイル\02_Draw\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="fade.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
     </ClCompile>
     <ClCompile Include="fall.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\01_Fall</Filter>
@@ -170,15 +164,6 @@
     </ClCompile>
     <ClCompile Include="fall_logo.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\01_Fall</Filter>
-    </ClCompile>
-    <ClCompile Include="manager.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="light.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game</Filter>
@@ -339,9 +324,6 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>ソース ファイル\02_Draw\3D</Filter>
     </ClCompile>
-    <ClCompile Include="renderer.cpp">
-      <Filter>ソース ファイル\00_System</Filter>
-    </ClCompile>
     <ClCompile Include="texture.cpp">
       <Filter>ソース ファイル\00_System\00_Resource</Filter>
     </ClCompile>
@@ -378,25 +360,37 @@
     <ClCompile Include="score.cpp">
       <Filter>ソース ファイル\01_Scene\02_Game\01_UI\99_other</Filter>
     </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="debugproc.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>ソース ファイル\00_System\99_other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bg.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
     <ClInclude Include="collision.h">
       <Filter>ヘッダー ファイル\02_Draw\3D</Filter>
     </ClInclude>
-    <ClInclude Include="debugproc.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
     <ClInclude Include="effect.h">
       <Filter>ヘッダー ファイル\02_Draw\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="fade.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
     </ClInclude>
     <ClInclude Include="fog.h">
       <Filter>ヘッダー ファイル\01_Scene\02_Game</Filter>
@@ -409,18 +403,6 @@
     </ClInclude>
     <ClInclude Include="input.h">
       <Filter>ヘッダー ファイル\00_System\01_Control</Filter>
-    </ClInclude>
-    <ClInclude Include="light.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="manager.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.h">
-      <Filter>ヘッダー ファイル\00_System</Filter>
     </ClInclude>
     <ClInclude Include="meshfield.h">
       <Filter>ヘッダー ファイル\02_Draw\3D</Filter>
@@ -622,6 +604,30 @@
     </ClInclude>
     <ClInclude Include="ui_base.h">
       <Filter>ヘッダー ファイル\01_Scene\02_Game\01_UI\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="debugproc.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>ヘッダー ファイル\00_System\99_other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

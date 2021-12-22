@@ -135,16 +135,16 @@ void CEffect::Draw(void)
 	// フォグを無効化
 	pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
 
-	// ライトをオフにする
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	// 加算合成によるアルファブレンディング
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	// Zテストの更新
 	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 
-	// 加算合成によるアルファブレンディング
-	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	// ライトをオフにする
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	// ワールドマトリックスの初期化
 	D3DXMatrixIdentity(&m_mtxWorld);
@@ -278,7 +278,7 @@ void CEffect::SetTexture(char *pText)
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CEffectDetail::CEffectDetail()
+CEffectDetail::CEffectDetail(int nPriority) : CEffect(nPriority)
 {
 
 }
@@ -409,7 +409,8 @@ HRESULT CEffectDetail::Init(void)
 		m_pClearEffect->BindTexture("EFFECT");
 		m_pClearEffect->SetTex(1, 1, 0, 0, 0.0f, 0.0f);
 		m_pClearEffect->SetCol(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
-		m_pClearEffect->EffectBlend();
+		m_pClearEffect->AlphaBlend();
+		m_pClearEffect->ZbuffBlend();
 
 		break;
 	}

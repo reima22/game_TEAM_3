@@ -136,19 +136,35 @@ void CGame::Uninit(void)
 			m_pObject[nCnt]->Uninit();
 		}
 
-		delete[] m_pObject;
+		if (m_nNumObject > 1)
+		{
+			delete[] m_pObject;
+		}
+		else
+		{
+			delete m_pObject;
+		}
+		
 		m_pObject = NULL;
 	}
 
 	// メッシュフィールドポインタの開放
 	if (m_pMeshField != NULL)
 	{
-		//for (int nCnt = 0; nCnt < m_nNumMeshfield; nCnt++)
-		//{
-		//	m_pMeshField[nCnt]->Uninit();
-		//}
+		for (int nCnt = 0; nCnt < m_nNumMeshfield; nCnt++)
+		{
+			m_pMeshField[nCnt]->Uninit();
+		}
 
-		delete m_pMeshField;		
+		if (m_nNumMeshfield > 1)
+		{
+			delete[] m_pMeshField;
+		}
+		else
+		{
+			delete m_pMeshField;
+		}
+
 		m_pMeshField = NULL;
 	}
 

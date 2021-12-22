@@ -80,6 +80,13 @@ void CFallCount::Uninit(void)
 void CFallCount::Update(void)
 {
 	SetNumber(m_nFall);
+
+	SizeReturn();
+
+	for (int nCntNum = 0; nCntNum < FALL_DIGIT_NUM; nCntNum++)
+	{
+		m_apNumber[nCntNum]->Update();
+	}
 }
 
 //==============================================================================
@@ -108,7 +115,7 @@ CFallCount *CFallCount::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 	// 初期化
 	if (pFallCount != NULL)
 	{
-		pFallCount->Init(pos, size);
+		pFallCount->Init(pos,size);
 	}
 
 	return pFallCount;
@@ -133,5 +140,48 @@ void CFallCount::SetNumber(int nFall)
 
 		// 桁の設定
 		m_apNumber[nCnt]->SetNumber(nNumber);
+	}
+}
+
+//==============================================================================
+// 落下カウント増加
+//==============================================================================
+void CFallCount::AddFall(int nAdd)
+{
+	// 加算
+	m_nFall += nAdd;
+
+	// サイズ拡大
+	for (int nCnt = 0; nCnt < FALL_DIGIT_NUM; nCnt++)
+	{
+		D3DXVECTOR2 size = m_apNumber[nCnt]->GetSize();
+
+		size = FALL_COUNT_SIZE + D3DXVECTOR2(20.0f, 20.0f);
+
+		m_apNumber[nCnt]->SetSize(size);
+		m_apNumber[nCnt]->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+	}
+}
+
+//==============================================================================
+// 数字サイズを戻す
+//==============================================================================
+void CFallCount::SizeReturn(void)
+{
+	for (int nCnt = 0; nCnt < FALL_DIGIT_NUM; nCnt++)
+	{
+		D3DXVECTOR2 size = m_apNumber[nCnt]->GetSize();
+
+		if (size.x > FALL_COUNT_SIZE.x)
+		{
+			size -= D3DXVECTOR2(0.5f, 0.5f);
+
+			m_apNumber[nCnt]->SetSize(size);
+		}
+		else
+		{
+			m_apNumber[nCnt]->SetSize(FALL_COUNT_SIZE);
+			m_apNumber[nCnt]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0, 1.0f));
+		}
 	}
 }

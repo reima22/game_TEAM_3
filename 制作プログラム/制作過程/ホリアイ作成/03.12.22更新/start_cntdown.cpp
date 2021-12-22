@@ -18,7 +18,7 @@
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CStartCntdown::CStartCntdown(int nPriority) : CScene2D(nPriority)
+CStartCntdown::CStartCntdown(int nPriority) : CScene(nPriority)
 {
 
 }
@@ -34,7 +34,7 @@ CStartCntdown::~CStartCntdown()
 //==============================================================================
 // 開始時カウントダウンの初期化処理
 //==============================================================================
-HRESULT CStartCntdown::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+HRESULT CStartCntdown::Init(void)
 {
 	// タイマー設定
 	m_nCntDown = 3;
@@ -48,8 +48,8 @@ HRESULT CStartCntdown::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 	if (m_pScene2D == NULL)
 	{
 		m_pScene2D = CScene2D::Create();						// 生成
-		m_pScene2D->SetPosition(pos);							// 位置
-		m_pScene2D->SetSize(size);								// サイズ
+		m_pScene2D->SetPosition(SCREEN_CENTER);					// 位置
+		m_pScene2D->SetSize(START_CNT_SIZE);					// サイズ
 		m_pScene2D->SetTex(1, 1, 0, 0, 0, 0);					// テクスチャ座標
 		m_pScene2D->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));	// 色の設定
 	}
@@ -130,20 +130,23 @@ void CStartCntdown::Update(void)
 //==============================================================================
 void CStartCntdown::Draw(void)
 {
-
+	if (m_pScene2D != NULL)
+	{
+		m_pScene2D->Draw();
+	}
 }
 
 //==============================================================================
 // 開始時カウントダウンの生成処理
 //==============================================================================
-CStartCntdown *CStartCntdown::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+CStartCntdown *CStartCntdown::Create(void)
 {
 	// インスタンス生成
 	CStartCntdown *pStartCntdown;
 	pStartCntdown = new CStartCntdown;
 
 	// 初期化
-	pStartCntdown->Init(pos, size);
+	pStartCntdown->Init();
 
 	return pStartCntdown;
 }

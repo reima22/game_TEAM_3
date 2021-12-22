@@ -24,7 +24,7 @@ D3DXCOLOR CPauseSelect::m_col;							// 選択中カーソルの色
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CPauseSelect::CPauseSelect(int nPriority) : CPause(nPriority)
+CPauseSelect::CPauseSelect(int nPriority) : CScene(nPriority)
 {
 }
 
@@ -157,7 +157,6 @@ void CPauseSelect::SetMode(void)
 	// フェード情報の取得
 	CFade *pFade;
 	pFade = CManager::GetFade();
-	//CFade::FADE fade = pFade->GetFade();
 
 	// キーボードの取得
 	CInputKeyboard *keyboard = CManager::GetInputKeyboard();
@@ -195,8 +194,7 @@ void CPauseSelect::SetMode(void)
 			}
 
 			m_apScene2D[nCnt]->SetTex(1, 2, 0, 0, 0.0f, 0.0f);
-			m_apScene2D[nCnt]->SetCol(m_col);
-			
+			m_apScene2D[nCnt]->SetCol(m_col);			
 		}
 		else
 		{// それ以外

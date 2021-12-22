@@ -14,7 +14,7 @@
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CPauseBg::CPauseBg(int nPriority) : CPause(nPriority)
+CPauseBg::CPauseBg(int nPriority) : CScene(nPriority)
 {
 
 }
@@ -30,13 +30,13 @@ CPauseBg::~CPauseBg()
 //==============================================================================
 // ポーズ背景の初期化処理
 //==============================================================================
-HRESULT CPauseBg::Init(D3DXVECTOR3 pos)
+HRESULT CPauseBg::Init(void)
 {
 	// 初期化
 	m_pScene2D = CScene2D::Create();
 
 	// 情報設定
-	m_pScene2D->SetPosition(pos);
+	m_pScene2D->SetPosition(SCREEN_CENTER);
 	m_pScene2D->SetSize(SCREEN_SIZE);
 	m_pScene2D->SetCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.5f));
 	m_pScene2D->SetTex(1, 1, 0, 0, 0.0f, 0.0f);
@@ -87,20 +87,27 @@ void CPauseBg::Update(void)
 //==============================================================================
 void CPauseBg::Draw(void)
 {
-
+	if (m_pScene2D != NULL)
+	{
+		m_pScene2D->Draw();
+	}
 }
 
 //==============================================================================
 // ポーズ背景の生成処理
 //==============================================================================
-CPauseBg *CPauseBg::Create(D3DXVECTOR3 pos)
+CPauseBg *CPauseBg::Create(void)
 {
 	// インスタンス生成
 	CPauseBg *pPauseBg;
 	pPauseBg = new CPauseBg;
 
 	// 初期化
-	pPauseBg->Init(pos);
+	if (pPauseBg != NULL)
+	{
+		pPauseBg->Init();
+	}
+
 
 	return pPauseBg;
 }

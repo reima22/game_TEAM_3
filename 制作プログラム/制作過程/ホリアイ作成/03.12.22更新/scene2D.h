@@ -53,7 +53,9 @@ public:
 	void SetCol(D3DXCOLOR col);
 
 	// エフェクトブレンドの許可切り替え
-	void EffectBlend(void) { m_bEffectBlend = !m_bEffectBlend; }
+	//void EffectBlend(void) { m_bEffectBlend = !m_bEffectBlend; }
+	void ZbuffBlend(void) { m_bZbuff = !m_bZbuff; }
+	void AlphaBlend(void) { m_bAlphaBlend = !m_bAlphaBlend; }
 
 private:
 	D3DXVECTOR3 m_pos;								// 位置
@@ -65,7 +67,9 @@ private:
 	float m_fAngle;									// 対角線の角度
 	D3DXVECTOR2 m_size;								// ポリゴンのサイズ
 
-	bool m_bEffectBlend;							// エフェクト用ブレンドの許可
+	//bool m_bEffectBlend;							// エフェクト用ブレンドの許可
+	bool m_bZbuff;									// Zバッファ許可
+	bool m_bAlphaBlend;								// αブレンド許可
 };
 
 #endif

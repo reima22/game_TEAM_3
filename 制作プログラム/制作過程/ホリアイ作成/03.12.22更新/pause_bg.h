@@ -13,17 +13,17 @@
 //==============================================================================
 // ポーズクラス
 //==============================================================================
-class CPauseBg : public CPause
+class CPauseBg : public CScene
 {
 public:
 	CPauseBg(int nPriority = CScene::PRIORITY_PAUSE);
 	~CPauseBg();
-	HRESULT Init(D3DXVECTOR3 pos);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	static CPauseBg *Create(D3DXVECTOR3 pos);
+	static CPauseBg *Create(void);
 
 private:
 	CScene2D *m_pScene2D;	// 2Dポリゴンのポインタ

@@ -18,7 +18,7 @@ class CScene2D;
 class CEffect : public CScene
 {
 public:
-	CEffect(int nPriority = PRIORITY_EFFECT);
+	CEffect(int nPriority = CScene::PRIORITY_EFFECT);
 	~CEffect();
 	HRESULT Init(void);
 	void Uninit(void);
@@ -95,7 +95,7 @@ public:
 		EFFECTTYPE_MAX
 	}EFFECTTYPE;
 
-	CEffectDetail();
+	CEffectDetail(int nPriority = CScene::PRIORITY_EFFECT);
 	~CEffectDetail();
 	HRESULT Init(void);
 	void Uninit(void);

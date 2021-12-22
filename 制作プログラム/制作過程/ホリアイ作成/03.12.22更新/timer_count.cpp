@@ -90,6 +90,12 @@ void CTimerCount::Update(void)
 
 	// タイマーの設定
 	SetNumber(m_nTimer);
+
+	// 数字の更新
+	for (int nCnt = 0; nCnt < TIMER_DIGIT_NUM; nCnt++)
+	{
+		m_apNumber[nCnt]->Update();
+	}
 }
 
 //==============================================================================
@@ -135,6 +141,25 @@ void CTimerCount::TimerDecrease(void)
 	if (m_nDecereaseCnt % 60 == 0 && m_nTimer > 0)
 	{
 		m_nTimer--;
+	}
+
+	// 残り時間3割
+	if (m_nTimer == 100 * 30 / 100)
+	{
+		m_pSound->Play(CSound::SOUND_LABEL_SE_TIMEWARNING);
+		
+		for (int nCnt = 0; nCnt < TIMER_DIGIT_NUM; nCnt++)
+		{
+			m_apNumber[nCnt]->SetCol(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+		}
+	}
+
+	if (m_nTimer == (100 * 30 / 100 - 3))
+	{
+		for (int nCnt = 0; nCnt < TIMER_DIGIT_NUM; nCnt++)
+		{
+			m_apNumber[nCnt]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 }
 

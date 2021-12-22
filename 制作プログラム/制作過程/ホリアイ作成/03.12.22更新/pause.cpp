@@ -47,7 +47,7 @@ HRESULT CPause::Init(void)
 	m_bPause = false;
 
 	// ”wŒi‚Ì¶¬
-	CPauseBg::Create(PAUSE_POS);
+	CPauseBg::Create();
 
 	// ƒx[ƒX‚Ì¶¬
 	CPauseBase::Create();

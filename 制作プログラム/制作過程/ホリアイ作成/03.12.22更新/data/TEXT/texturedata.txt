@@ -75,6 +75,6 @@ TEXTURE_FILENAME = data\TEXTURE\runningman002.png			TITLE_RUNNINGMAN	# [57]ƒ^ƒCƒ
 TEXTURE_FILENAME = data\TEXTURE\tutoboard00.png				TUTOTEX0			# [58]ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒeƒNƒXƒ`ƒƒ0
 TEXTURE_FILENAME = data\TEXTURE\tutoboard01.png				TUTOTEX1			# [59]ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒeƒNƒXƒ`ƒƒ1
 TEXTURE_FILENAME = data\TEXTURE\checkpoint_logo.png			CHECKPOINT_LOGO		# [60]ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒgƒƒS
-TEXTURE_FILENAME = data\TEXTURE\smoke.png					SMOKE				# [61]‰ŒƒGƒtƒFƒNƒg
+TEXTURE_FILENAME = data\TEXTURE\smoke.jpg					SMOKE				# [61]‰ŒƒGƒtƒFƒNƒg
 
 END_SCRIPT

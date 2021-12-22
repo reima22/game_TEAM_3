@@ -65,10 +65,10 @@ public:
 		PRIORITY_BG = 0,	// 背景
 		PRIORITY_CHARA,		// キャラクター
 		PRIORITY_DEFAULT,	// デフォルト値
-		PRIORITY_EFFECT,	// エフェクト		
 		PRIORITY_ITEM,		// アイテム
 		PRIORITY_EXPLOSION,	// 爆発
 		PRIORITY_UI,		// UI
+		PRIORITY_EFFECT,	// エフェクト		
 		PRIORITY_PAUSE,		// ポーズ
 		PRIORITY_SHADOW,	// 丸影
 		PRIORITY_EFFECT_ON,	// エフェクト

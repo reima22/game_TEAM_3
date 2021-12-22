@@ -154,6 +154,7 @@ void CMode::SetMode(MODE mode)
 	// オブジェクト破棄
 	CScene::ReleaseAll();
 
+	// 死亡フラグ更新
 	CScene::UpdateAll();
 
 	// モードの設定

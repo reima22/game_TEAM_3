@@ -13,7 +13,7 @@
 //==============================================================================
 // ポーズベースクラス
 //==============================================================================
-class CPauseBase : public CPause
+class CPauseBase : public CScene
 {
 public:
 	CPauseBase(int nPriority = CScene::PRIORITY_PAUSE);

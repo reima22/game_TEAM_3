@@ -16,7 +16,7 @@
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CPauseBase::CPauseBase(int nPriority) : CPause(nPriority)
+CPauseBase::CPauseBase(int nPriority) : CScene(nPriority)
 {
 }
 
@@ -97,7 +97,10 @@ void CPauseBase::Update(void)
 //==============================================================================
 void CPauseBase::Draw(void)
 {
-	//m_pScene2D->Draw();
+	if (m_pScene2D != NULL)
+	{
+		m_pScene2D->Draw();
+	}
 }
 
 //==============================================================================
@@ -110,7 +113,10 @@ CPauseBase *CPauseBase::Create(void)
 	pPauseBase = new CPauseBase;
 
 	// 初期化
-	pPauseBase->Init();
+	if (pPauseBase != NULL)
+	{
+		pPauseBase->Init();
+	}
 
 	return pPauseBase;
 }

@@ -16,7 +16,7 @@
 //==============================================================================
 // 開始時カウントダウンクラス
 //==============================================================================
-class CStartCntdown : public CScene2D
+class CStartCntdown : public CScene
 {
 public:
 	typedef enum
@@ -30,12 +30,12 @@ public:
 
 	CStartCntdown(int nPriority = PRIORITY_UI);
 	~CStartCntdown();
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	static CStartCntdown *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	static CStartCntdown *Create(void);
 
 	//void TimerDecrease(void);		// タイマー減少
 

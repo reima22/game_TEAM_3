@@ -37,7 +37,9 @@ public:
 	void SetNumber(int nBonus);
 
 	// ”‚Ì‰ÁZ
-	void AddBonus(int nAdd) { m_nBonus += nAdd; }
+	void AddBonus(int nAdd);
+
+	void SizeReturn(void);
 
 	// ƒŠƒUƒ‹ƒg‚Ö‚ÌŒp³
 	static int GetBonusNum(void) { return m_nBonusResult; }

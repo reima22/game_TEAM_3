@@ -190,11 +190,11 @@ void CMeshfield::Uninit(void)
 	}
 
 	// テクスチャの開放
-	if (m_pTexture != NULL)
-	{
-		m_pTexture->Release();
-		m_pTexture = NULL;
-	}
+	//if (m_pTexture != NULL)
+	//{
+	//	m_pTexture->Release();
+	//	m_pTexture = NULL;
+	//}
 
 	// インデックスバッファの開放
 	if (m_pIdxBuff != NULL)
@@ -216,9 +216,6 @@ void CMeshfield::Uninit(void)
 //==============================================================================
 void CMeshfield::Update(void)
 {
-	// 波形の挙動
-	//MeshWave();
-
 	// 法線の計算
 	CalcuNormal();
 }

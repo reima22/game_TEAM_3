@@ -23,7 +23,9 @@ CScene2D::CScene2D(int nPriority) : CScene(nPriority)
 	m_size = VECTOR2_NULL;
 	m_fLength = 0.0f;
 	m_fAngle = 0.0f;
-	m_bEffectBlend = false;
+	//m_bEffectBlend = false;
+	m_bZbuff = false;
+	m_bAlphaBlend = false;
 }
 
 //==============================================================================
@@ -163,12 +165,15 @@ void CScene2D::Draw(void)
 
 	pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
 
-	if (m_bEffectBlend == true)
+	if (m_bZbuff == true)
 	{
 		// Zテストの更新
 		pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
 		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	}
 
+	if (m_bAlphaBlend == true)
+	{
 		// 加算合成によるアルファブレンディング
 		pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
@@ -193,15 +198,18 @@ void CScene2D::Draw(void)
 		0,						// 描画を開始する頂点インデックス
 		2);						// 描画するプリミティブ数
 
-	if (m_bEffectBlend == true)
+	if (m_bZbuff == true)
+	{
+		// 元に戻す
+		pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	}
+
+	if (m_bAlphaBlend == true)
 	{
 		// 通常のアルファブレンディング
 		pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-		// 元に戻す
-		pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
-		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 	}
 
 	pDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
