@@ -145,7 +145,7 @@ void CTimerCount::TimerDecrease(void)
 	CUi *pUi = CGame::GetUi();
 
 	// c‚èŠÔ3Š„‚ÅŒx
-	if (m_nTimer == TIMER_START * 30 / 100)
+	if (m_nTimer == 30)
 	{
 		m_pSound->Play(CSound::SOUND_LABEL_SE_TIMEWARNING);
 		
@@ -158,7 +158,7 @@ void CTimerCount::TimerDecrease(void)
 	}
 
 	// ”šF‚Ì•Ï‰»
-	if (m_nTimer == (TIMER_START * 30 / 100 - 3))
+	if (m_nTimer == (30 - 3))
 	{
 		for (int nCnt = 0; nCnt < TIMER_DIGIT_NUM; nCnt++)
 		{

@@ -362,7 +362,7 @@ HRESULT CEffectDetail::Init(void)
 			m_ppEffect[nCntEffect]->SetSize(D3DXVECTOR2(1.0f, 1.0f));
 			m_ppEffect[nCntEffect]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 			m_ppEffect[nCntEffect]->SetTexture("SMOKE");
-			m_ppEffect[nCntEffect]->SetAlphaDown(0.02f);
+			m_ppEffect[nCntEffect]->SetAlphaDown(0.04f);
 		}
 
 		break;

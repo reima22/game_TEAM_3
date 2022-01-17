@@ -382,7 +382,7 @@ void CObject::ResetObject(void)
 	CTextDataObject *pDataObject = CTextData::GetDataObject(select);
 
 	// —Ž‰º‚µ‚½‚à‚Ì‚Ì•œŠˆ
-	if (m_bDropOut == true)
+	if (m_bDropOut == true || pDataObject->GetMovePower(m_nIdx) != 0)
 	{
 		m_pos = pDataObject->GetPosition(m_nIdx);
 		m_move = VECTOR3_NULL;
@@ -390,6 +390,7 @@ void CObject::ResetObject(void)
 		m_pModel->SetMove(m_move);
 		m_nDropCnt = 0;
 		m_bDropOut = false;
+		m_moveRot = VECTOR3_NULL;
 	}
 }
 
