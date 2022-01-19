@@ -5,7 +5,6 @@
 //
 //==============================================================================
 #define _CRT_SECURE_NO_WARNINGS
-#include "main.h"
 #include "textdata.h"
 #include "textdata_terrain.h"
 #include "stdio.h"

@@ -5,13 +5,11 @@
 //
 //==============================================================================
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
-#include "input.h"
-#include "score.h"
 #include "number.h"
-#include "mode.h"
+#include "renderer.h"
+#include "scene2D.h"
+#include "score.h"
 
 // 静的メンバ変数宣言
 int CScore::m_nResultScore = 0;
@@ -40,14 +38,22 @@ CScore::~CScore()
 //==============================================================================
 HRESULT CScore::Init(void)
 {
+	// 数値の生成
 	for (int nCnt = 0; nCnt < NUM_MAX; nCnt++)
 	{
 		if (m_apNumber[nCnt] == NULL)
 		{
-			m_apNumber[nCnt] = CNumber::Create(D3DXVECTOR3(m_posBase.x + (nCnt * (m_size.x * 2)), m_posBase.y, 0.0f), m_size);
+			m_apNumber[nCnt] = 
+				CNumber::Create(
+					D3DXVECTOR3(
+						m_posBase.x + (nCnt * (m_size.x * 2)), 
+						m_posBase.y, 
+						0.0f), 
+					m_size);
 		}
 	}
 
+	// スコア初期化
 	m_nScore = 0;
 
 	return S_OK;
@@ -75,6 +81,7 @@ void CScore::Uninit(void)
 //==============================================================================
 void CScore::Update(void)
 {
+	// 値の補正
 	if (m_nScore < 0)
 	{
 		m_nScore = 0;

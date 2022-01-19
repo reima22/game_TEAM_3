@@ -5,11 +5,10 @@
 //
 //==============================================================================
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "pause_bg.h"
-#include "input.h"
+#include "renderer.h"
+#include "scene2D.h"
 
 //==============================================================================
 // コンストラクタ

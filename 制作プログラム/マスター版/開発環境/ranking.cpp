@@ -4,21 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "input.h"
-#include "gamepad.h"
 #include "bg.h" 
 #include "fade.h"
-#include "title.h"
 #include "ranking.h"
 #include "ranking_logo.h"
 #include "ranking_rank.h"
 #include "ranking_score.h"
 #include "ranking_select.h"
-#include "sound.h"
 #include "select.h"
 
 //==============================================================================

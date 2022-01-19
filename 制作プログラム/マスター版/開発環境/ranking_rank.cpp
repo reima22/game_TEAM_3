@@ -4,16 +4,10 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
 #include "ranking.h"
 #include "ranking_rank.h"
 #include "ranking_score.h"
+#include "scene2D.h"
 
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
 int CRankingRank::m_aRank[RANK_NUM];

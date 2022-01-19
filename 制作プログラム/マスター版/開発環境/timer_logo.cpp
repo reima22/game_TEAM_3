@@ -5,14 +5,12 @@
 //
 //==============================================================================
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
+#include "renderer.h"
 #include "number.h"
+#include "scene2D.h"
 #include "texture.h"
-//#include "timer_count.h"
 #include "timer_logo.h"
-#include "select.h"
 
 //==============================================================================
 // コンストラクタ
@@ -35,8 +33,6 @@ CTimerLogo::~CTimerLogo()
 //==============================================================================
 HRESULT CTimerLogo::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	//CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
-
 	// 2Dポリゴンを生成
 	m_pScene2D = CScene2D::Create();
 

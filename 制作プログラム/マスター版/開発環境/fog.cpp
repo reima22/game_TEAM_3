@@ -36,7 +36,7 @@ HRESULT CFog::Init(void)
 	m_fFogStart = FOG_START;
 	m_fFogEnd = FOG_END;
 
-	m_col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);	// 黒色
+	m_col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// 黒色
 
 	return S_OK;
 }
@@ -57,6 +57,8 @@ void CFog::Update(void)
 	// キーボードの取得
 	CInputKeyboard *keyboard = CManager::GetInputKeyboard();
 
+	// フォグの操作
+	// 開始点
 	if (keyboard->GetPress(CInput::KEYINFO_FOGSTART_PLUS) == true)
 	{
 		m_fFogStart += 5.0f;
@@ -67,6 +69,7 @@ void CFog::Update(void)
 		m_fFogStart -= 5.0f;
 	}
 
+	// 奥行終着
 	if (keyboard->GetPress(CInput::KEYINFO_FOGEND_PLUS) == true)
 	{
 		m_fFogEnd += 5.0f;

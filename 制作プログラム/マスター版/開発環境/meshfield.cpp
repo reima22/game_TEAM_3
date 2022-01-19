@@ -5,11 +5,8 @@
 //
 //==============================================================================
 #include "meshfield.h"
-#include "input.h"
 #include "manager.h"
 #include "renderer.h"
-#include "game.h"
-#include "player.h"
 #include "textdata.h"
 #include "textdata_meshfield.h"
 #include "texture.h"

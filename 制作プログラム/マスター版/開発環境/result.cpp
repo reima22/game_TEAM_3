@@ -4,39 +4,40 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "input.h"
-#include "gamepad.h"
-#include "result.h"
 #include "bg.h"
 #include "fade.h"
+#include "gamepad.h"
+#include "input.h"
+#include "result.h"
+#include "result_bonuscount.h"
+#include "result_fallcount.h"
 #include "result_picture.h"
 #include "result_score.h"
-#include "result_timer.h"
-#include "result_fallcount.h"
 #include "result_score_extra.h"
-#include "result_bonuscount.h"
-#include "sound.h"
-#include "mode.h"
+#include "result_timer.h"
+#include "scene2D.h"
 
+//==============================================================================
 // 静的メンバ変数宣言
-CResultPicture *CResult::m_pResultPicture[PICTYPE_MAX] = {};		// 表示画像
-CResultScore *CResult::m_pResultScore = NULL;						// リザルトスコアポインタ
-CResultTimer *CResult::m_pResultTimer = NULL;						// リザルトタイマーポインタ
-CResultBonus *CResult::m_pResultBonus = NULL;						// リザルトボーナスポインタ
-CResultFallCount *CResult::m_pResultFallCount = NULL;				// リザルト落下数ポインタ
-CResultScoreEx *CResult::m_pResultScoreEx[EXSCORETYPE_MAX] = {};	// 他結果スコアポインタ
-CResult::ENDSTATE CResult::m_endState;								// ゲーム終了時の状態
+//==============================================================================
+CResultPicture		*CResult::m_pResultPicture[PICTYPE_MAX] = {};		// 表示画像
+CResultTimer		*CResult::m_pResultTimer = NULL;					// リザルトタイマーポインタ
+CResultFallCount	*CResult::m_pResultFallCount = NULL;				// リザルト落下数ポインタ
+CResultBonus		*CResult::m_pResultBonus = NULL;					// リザルトボーナスポインタ
+CResultScore		*CResult::m_pResultScore = NULL;					// リザルトスコアポインタ
+CResultScoreEx		*CResult::m_pResultScoreEx[EXSCORETYPE_MAX] = {};	// 他結果スコアポインタ
+CResult::ENDSTATE	CResult::m_endState;								// ゲーム終了時の状態
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 CResult::CResult(int nPriority) : CMode(nPriority)
 {
-	
+	// 初期化
+	for (int nCntPicture = 0; nCntPicture < PICTYPE_MAX; nCntPicture++)
+	{
+		m_pResultPicture[nCntPicture] = NULL;
+	}
 }
 
 //==============================================================================

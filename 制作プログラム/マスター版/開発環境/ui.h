@@ -33,12 +33,13 @@ public:
 
 	static CUi *Create(void);
 
-	static CTimer *GetTimer(void) { return m_pTimer; }
-	static CFall *GetFall(void) { return m_pFall; }
-	static CStartCntdown *GetStartCntdown(void) { return m_pStartCntdown; }
-	static CBonus *GetBonus(void) { return m_pBonus; }
-	static CCheckpointLogo *GetCheckPointLogo(void) { return m_pCheckPointLogo; }
-	static CAlertLogo *GetAlertLogo(void) { return m_pAlertLogo; }
+	// ポインタの取得
+	static CTimer			*GetTimer(void)				{ return m_pTimer; }
+	static CFall			*GetFall(void)				{ return m_pFall; }
+	static CStartCntdown	*GetStartCntdown(void)		{ return m_pStartCntdown; }
+	static CBonus			*GetBonus(void)				{ return m_pBonus; }
+	static CCheckpointLogo	*GetCheckPointLogo(void)	{ return m_pCheckPointLogo; }
+	static CAlertLogo		*GetAlertLogo(void)			{ return m_pAlertLogo; }
 
 private:
 	static CTimer *m_pTimer;					// タイマーのポインタ
@@ -48,5 +49,4 @@ private:
 	static CCheckpointLogo *m_pCheckPointLogo;	// チェックポイントロゴ
 	static CAlertLogo *m_pAlertLogo;			// タイマーアラートロゴ
 };
-
 #endif

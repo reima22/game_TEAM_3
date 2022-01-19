@@ -5,19 +5,15 @@
 //
 //==============================================================================
 #include "bg.h"
-#include "game.h"
-#include "gamepad.h"
-#include "input.h"
-#include "main.h"
 #include "manager.h"
 #include "mode.h"
-#include "renderer.h"
-#include "result.h"
 #include "scene2D.h"
 #include "select.h"
 #include "texture.h"
 
+//==============================================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
+//==============================================================================
 D3DXVECTOR3 CBg::m_pos = SCREEN_CENTER;
 
 //==============================================================================

@@ -1,17 +1,12 @@
 //==============================================================================
 //
-// ビルボード描画処理〔sceneBillboard.cpp〕
+// エフェクト描画処理〔effect.cpp〕
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene3D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "input.h"
-#include "texture.h"
-#include "fade.h"
 #include "effect.h"
+#include "manager.h"
+#include "renderer.h"
 #include "scene2D.h"
 
 //==============================================================================
@@ -31,7 +26,7 @@ CEffect::~CEffect()
 }
 
 //==============================================================================
-// ビルボードの初期化処理
+// エフェクトの初期化処理
 //==============================================================================
 HRESULT CEffect::Init(void)
 {
@@ -85,7 +80,7 @@ HRESULT CEffect::Init(void)
 }
 
 //==============================================================================
-// ポリゴン描画の終了処理
+// エフェクトの描画の終了処理
 //==============================================================================
 void CEffect::Uninit(void)
 {
@@ -96,18 +91,11 @@ void CEffect::Uninit(void)
 		m_pVtxBuff = NULL;
 	}
 
-	// テクスチャの開放
-	//if (m_pTexture != NULL)
-	//{
-	//	m_pTexture->Release();
-	//	m_pTexture = NULL;
-	//}
-
 	Release();
 }
 
 //==============================================================================
-// ポリゴン描画の更新処理
+// エフェクトの描画の更新処理
 //==============================================================================
 void CEffect::Update(void)
 {  
@@ -120,7 +108,7 @@ void CEffect::Update(void)
 }
 
 //==============================================================================
-// ポリゴン描画の描画処理
+// エフェクトの描画の描画処理
 //==============================================================================
 void CEffect::Draw(void)
 {
@@ -196,7 +184,7 @@ void CEffect::Draw(void)
 }
 
 //==============================================================================
-// ビルボードの生成
+// エフェクトの生成
 //==============================================================================
 CEffect *CEffect::Create(void)
 {
@@ -213,25 +201,6 @@ CEffect *CEffect::Create(void)
 	// 返し値
 	return pEffect;
 }
-
-//==============================================================================
-// エフェクトの設定
-//==============================================================================
-//void CEffect::SetEffect(void)
-//{
-//	// ローカル変数宣言
-//	CTexture *pTexture = CManager::GetTexture();
-//
-//	switch (m_effectType)
-//	{
-//	case EFFECTTYPE_SANDSMOKE:	// 砂煙
-//
-//		m_pTexture = pTexture->GetAddress("EFFECT");
-//		SetColor(D3DXCOLOR(0.34f, 0.47f, 0.21f, 1.0f));
-//
-//		break;
-//	}
-//}
 
 //==============================================================================
 // 頂点情報の設定
@@ -272,7 +241,6 @@ void CEffect::SetTexture(char *pText)
 	m_pTexture = pTexture->GetAddress(pText);
 }
 
-
 /*砂煙エフェクト*/
 
 //==============================================================================
@@ -292,7 +260,7 @@ CEffectDetail::~CEffectDetail()
 }
 
 //==============================================================================
-// ビルボードの初期化処理
+// エフェクト詳細の初期化処理
 //==============================================================================
 HRESULT CEffectDetail::Init(void)
 {
@@ -301,25 +269,25 @@ HRESULT CEffectDetail::Init(void)
 	{
 	case EFFECTTYPE_SANDSMOKE:
 
-		m_nNumEffect = 1;
+		m_nNumEffect = EFFECT_NUM_SANDSMOKE;
 
 		break;
 
 	case EFFECTTYPE_LANDING:
 		
-		m_nNumEffect = 20;
+		m_nNumEffect = EFFECT_NUM_LANDING;
 
 		break;
 
 	case EFFECTTYPE_DIVE_WATER:
 		
-		m_nNumEffect = 20;
+		m_nNumEffect = EFFECT_NUM_WATER;
 
 		break;
 
 	case EFFECTTYPE_DIVE_LAVA:
 
-		m_nNumEffect = 1;
+		m_nNumEffect = EFFECT_NUM_LAVA;
 
 		break;
 	}
@@ -337,6 +305,7 @@ HRESULT CEffectDetail::Init(void)
 	{
 	case EFFECTTYPE_SANDSMOKE:
 
+		// エフェクト生成
 		m_ppEffect[0] = CEffect::Create();
 		m_ppEffect[0]->SetPosition(m_posMain);
 		m_ppEffect[0]->SetMove(D3DXVECTOR3(0.0f, 1.0f, 0.0f));
@@ -355,11 +324,11 @@ HRESULT CEffectDetail::Init(void)
 			m_ppEffect[nCntEffect] = CEffect::Create();
 			m_ppEffect[nCntEffect]->SetPosition(m_posMain);
 
-			move.x = sinf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * 1.0f;
-			move.z = cosf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * 1.0f;
+			move.x = sinf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * 5.0f;
+			move.z = cosf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * 5.0f;
 
 			m_ppEffect[nCntEffect]->SetMove(move);
-			m_ppEffect[nCntEffect]->SetSize(D3DXVECTOR2(1.0f, 1.0f));
+			m_ppEffect[nCntEffect]->SetSize(D3DXVECTOR2(2.0f, 2.0f));
 			m_ppEffect[nCntEffect]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 			m_ppEffect[nCntEffect]->SetTexture("SMOKE");
 			m_ppEffect[nCntEffect]->SetAlphaDown(0.04f);
@@ -368,6 +337,7 @@ HRESULT CEffectDetail::Init(void)
 		break;
 
 	case EFFECTTYPE_DIVE_WATER:
+
 		// エフェクト生成
 		for (int nCntEffect = 0; nCntEffect < m_nNumEffect; nCntEffect++)
 		{
@@ -377,7 +347,7 @@ HRESULT CEffectDetail::Init(void)
 			move.x = sinf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * (rand() % 5 + 1);
 			move.z = cosf((D3DX_PI * 2.0f / m_nNumEffect) * nCntEffect) * (rand() % 5 + 1);
 
-			move.y = (float)(rand() % 50 + 1) / 10.0f;
+			move.y = (float)(rand() % 50 + 1) / 10;
 
 			m_ppEffect[nCntEffect]->SetMove(move);
 			m_ppEffect[nCntEffect]->SetSize(D3DXVECTOR2(10.0f, 10.0f));
@@ -401,6 +371,8 @@ HRESULT CEffectDetail::Init(void)
 		break;
 
 	case EFFECTTYPE_GAMECLEAR:
+
+		// エフェクト生成
 		m_pClearEffect = CScene2D::Create();
 		float fX = (float)(rand() % 1200 + 40);
 
@@ -530,17 +502,35 @@ void CEffectDetail::Update(void)
 
 		m_ppEffect[0]->SetSize(size);
 	}
+
+	// 着地エフェクト
+	if (m_effectType == EFFECTTYPE_LANDING)
+	{
+
+
+		for (int nCntEffect = 0; nCntEffect < m_nNumEffect; nCntEffect++)
+		{
+			D3DXVECTOR3 move = m_ppEffect[nCntEffect]->GetMove();
+
+			// 減速処理
+			move.x += (0.0f - move.x) * EFFECT_SPEED_DOWN;
+			move.z += (0.0f - move.z) * EFFECT_SPEED_DOWN;
+
+			m_ppEffect[nCntEffect]->SetMove(move);
+		}
+		
+	}
 }
 
 //==============================================================================
-// ポリゴン描画の描画処理
+// エフェクト詳細の描画処理
 //==============================================================================
 void CEffectDetail::Draw(void)
 {
 }
 
 //==============================================================================
-// エフェクトの生成
+// エフェクト詳細の生成
 //==============================================================================
 CEffectDetail *CEffectDetail::Create(EFFECTTYPE effectType, D3DXVECTOR3 pos)
 {

@@ -4,11 +4,9 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "number.h"
+#include "renderer.h"
 #include "texture.h"
 #include "textdata_texture.h"
 

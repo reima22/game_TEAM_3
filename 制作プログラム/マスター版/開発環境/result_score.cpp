@@ -4,26 +4,16 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-//#define _CRT_SECURE_NO_WARNINGS
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
-#include "result_score.h"
 #include "fade.h"
-#include "score.h"
+#include "result_score.h"
 #include "result_score_extra.h"
-//#include "ranking_rank.h"
-//#include "ranking_score.h"
-//#include "stdio.h"
 
+//==============================================================================
 // 静的メンバ変数宣言
-int CResultScore::m_nScore;
-int CResultScore::m_nShuffleCnt;
-bool CResultScore::m_bCntEventEnd[SCORETYPE_MAX] = {};
+//==============================================================================
+int CResultScore::m_nScore;								// スコア
+int CResultScore::m_nShuffleCnt;						// シャッフル演出のカウント
+bool CResultScore::m_bCntEventEnd[SCORETYPE_MAX] = {};	// 演出のフラグ
 
 //==============================================================================
 // コンストラクタ

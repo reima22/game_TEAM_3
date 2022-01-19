@@ -9,24 +9,21 @@
 #define _GAME_H_
 
 #include "main.h"
-#include "scene.h"
 #include "mode.h"
 
 // 前方宣言
-class CSceneX;			// シーンXクラス
-class CPlayer;			// プレイヤークラス
+class CBonus;			// ボーナスクラス
+//class CCheckpointLogo;	// チェックポイントロゴクラス
+class CGamesetLogo;		// ゲーム結果ロゴ
+//class CFall;			// 落下数クラス
+class CFog;				// フォグ効果クラス
+class CMeshfield;		// メッシュフィールドクラス
 class CObject;			// オブジェクトクラス
 class CPause;			// ポーズクラス
+class CPlayer;			// プレイヤークラス
+//class CStartCntdown;	// 開始時カウントダウンクラス
 class CTerrain;			// メッシュ
-class CTimer;			// タイマークラス
-class CFall;			// 落下数クラス
-class CSound;			// サウンドクラス
-class CMeshfield;		// メッシュフィールドクラス
-class CStartCntdown;	// 開始時カウントダウンクラス
-class CFog;				// フォグ効果クラス
-class CBonus;			// ボーナスクラス
-class CCheckpointLogo;	// チェックポイントロゴクラス
-class CGamesetLogo;		// ゲーム結果ロゴ
+//class CTimer;			// タイマークラス
 class CUi;				// UIクラス
 
 //==============================================================================
@@ -35,7 +32,7 @@ class CUi;				// UIクラス
 class CGame : public CMode
 {
 public:
-	// フェイズ分割
+	// ゲームクリアフェイズ
 	typedef enum
 	{
 		CLEARPHASE_NONE = 0,	// クリア判定なし
@@ -45,6 +42,7 @@ public:
 		CLEARPHASE_MAX
 	}CLEARPHASE;
 
+	// ゲームオーバーフェイズ
 	typedef enum
 	{
 		GAMEOVERPHASE_NONE = 0,		// 判定無し
@@ -63,25 +61,18 @@ public:
 
 	static CGame *Create(void);
 
-	void SetStageObject(void);
+	void SetStageObject(void);	// ステージオブジェクトの設定
 
-	void EndGame(void);
-	void GameClear(void);
-	void GameOver(void);
+	void EndGame(void);		// ゲーム終了
+	void GameClear(void);	// ゲームクリア処理
+	void GameOver(void);	// ゲームオーバー処理
 
-	static CPlayer *GetPlayer(void) { return m_pPlayer; }
-	static CTerrain *GetTerrain(void) { return m_pTerrain; }
-	static CObject *GetPointObject(int nCnt) { return m_pObject[nCnt]; }
-	static CMeshfield *GetMeshField(int nIdx) { return m_pMeshField[nIdx]; }	// メッシュフィールドポインタ
+	static CPlayer *GetPlayer(void) { return m_pPlayer; }						// プレイヤーポインタ
+	static CTerrain *GetTerrain(void) { return m_pTerrain; }					// 死亡判定メッシュポインタ
+	static CObject *GetPointObject(int nCnt) { return m_ppObject[nCnt]; }		// オブジェクトポインタ
+	static CMeshfield *GetMeshField(int nIdx) { return m_ppMeshField[nIdx]; }	// メッシュフィールドポインタ
 	static CFog *GetFog(void) { return m_pFog; }								// フォグ取得
-
 	static CUi *GetUi(void) { return m_pUi; }									// UIの取得
-
-	//static CTimer *GetTimer(void) { return m_pTimer; }
-	//static CFall *GetFall(void) { return m_pFall; }
-	//static CStartCntdown *GetStartCntdown(void) { return m_pStartCntdown; }		// 開始時カウントダウンクラス
-	//static CBonus *GetBonus(void) { return m_pBonus; }
-	//static CCheckpointLogo *GetCheckPointLogo(void) { return m_pCheckPointLogo; }
 
 	// ゲーム終了フラグの取得・設定
 	static bool GetGameEnd(void) { return m_bGameEnd; }
@@ -101,11 +92,10 @@ private:
 	static CPause *m_pPause;				// ポーズのポインタ
 	static CPlayer *m_pPlayer;				// プレイヤーのポインタ
 
-
 	static CTerrain *m_pTerrain;			// メッシュ	
 
-	static CObject **m_pObject;				// オブジェクトのポインタ
-	static CMeshfield **m_pMeshField;		// オリジナルメッシュ
+	static CObject **m_ppObject;				// オブジェクトのポインタ
+	static CMeshfield **m_ppMeshField;		// オリジナルメッシュ
 
 	static CFog *m_pFog;					// フォグ効果クラス
 
@@ -115,13 +105,7 @@ private:
 	static CLEARPHASE m_clearPhase;			// クリア時のフェイズ分割
 	static GAMEOVERPHASE m_gameoverPhase;	// ゲームオーバー時のフェーズ分割
 
-	static CGamesetLogo *m_pGamesetLogo;
-
-	//static CTimer *m_pTimer;				// タイマーのポインタ
-	//static CFall *m_pFall;					// 落下数のポインタ
-	//static CStartCntdown *m_pStartCntdown;	// 開始時カウントダウンクラス
-	//static CBonus *m_pBonus;				// ボーナスクラスポインタ
-	//static CCheckpointLogo *m_pCheckPointLogo;	// チェックポイントロゴ
+	static CGamesetLogo *m_pGamesetLogo;	// ゲーム終了時のロゴポインタ
 
 	static CUi *m_pUi;						// UIのポインタ
 };

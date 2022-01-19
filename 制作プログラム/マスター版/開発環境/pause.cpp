@@ -4,20 +4,19 @@
 // Author : Mare Horiai
 //
 //==============================================================================
+#include "fade.h"
+#include "game.h"
+#include "gamepad.h"
+#include "input.h"
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "pause.h"
-#include "pause_bg.h"
 #include "pause_base.h"
+#include "pause_bg.h"
 #include "pause_select.h"
-#include "input.h"
-#include "gamepad.h"
+#include "renderer.h"
+#include "scene2D.h"
 #include "sound.h"
-#include "fade.h"
-
-#include "game.h"
 
 // Ã“Iƒƒ“ƒo•Ï”
 bool CPause::m_bPause;

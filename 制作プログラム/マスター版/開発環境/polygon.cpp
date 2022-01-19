@@ -5,10 +5,9 @@
 //
 //==============================================================================
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "polygon.h"
+#include "renderer.h"
 #include "texture.h"
 
 //==============================================================================

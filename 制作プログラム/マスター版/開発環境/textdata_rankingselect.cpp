@@ -5,7 +5,6 @@
 //
 //==============================================================================
 #define _CRT_SECURE_NO_WARNINGS
-#include "main.h"
 #include "ranking_score.h"
 #include "select.h"
 #include "textdata.h"

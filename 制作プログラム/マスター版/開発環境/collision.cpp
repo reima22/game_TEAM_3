@@ -4,12 +4,7 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "renderer.h"
-#include "manager.h"
 #include "collision.h"
-#include "shadow.h" 
-#include "input.h"
 
 //==============================================================================
 // コンストラクタ
@@ -195,10 +190,6 @@ bool CCollision::CollisionMesh(CPlayer *pPlayer, CMeshfield *pMesh)
 	D3DXVECTOR3 posPlayerOld = pPlayer->GetPosOld();	// 過去の位置
 	bool bLand = false;									// プレイヤーの着地状態
 	bool bInMesh = false;								// メッシュの範囲内
-
-	// キーボードの取得
-	CInputKeyboard *keyboard;
-	keyboard = CManager::GetInputKeyboard();
 
 	// バッファの取得
 	LPDIRECT3DVERTEXBUFFER9 pVtxBuff = pMesh->GetVtxBuff();

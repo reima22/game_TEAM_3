@@ -4,15 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "number.h"
-#include "texture.h"
 #include "fall_count.h"
-#include "select.h"
+#include "main.h"
+#include "manager.h"
 #include "mode.h"
+#include "number.h"
+#include "renderer.h"
+#include "texture.h"
 
 // ê√ìIÉÅÉìÉoïœêî
 int CFallCount::m_nFallResult = 0;
@@ -42,7 +40,7 @@ CFallCount::~CFallCount()
 //==============================================================================
 HRESULT CFallCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
+	//CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
 
 	// óéâ∫êîê›íË
 	m_nFall = 0;

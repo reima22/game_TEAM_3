@@ -4,14 +4,14 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene.h"
-#include "scene2D.h"
-#include "pause.h"
 #include "camera.h"
+#include "pause.h"
+#include "scene.h"
 
+//==============================================================================
 // 静的メンバ変数宣言
-int CScene::m_nNumAll = 0;
+//==============================================================================
+int CScene::m_nNumAll = 0;							// オブジェクトの総数
 CScene *CScene::m_pTop[PRIORITY_MAX] = {};			// 先頭のオブジェクトポインタ
 CScene *CScene::m_pCur[PRIORITY_MAX] = {};			// 現在のオブジェクトのポインタ
 

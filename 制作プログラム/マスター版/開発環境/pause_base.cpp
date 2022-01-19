@@ -5,11 +5,10 @@
 //
 //==============================================================================
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
+#include "renderer.h"
 #include "pause_base.h"
-#include "input.h"
+#include "scene2D.h"
 #include "textdata.h"
 #include "textdata_pause.h"
 

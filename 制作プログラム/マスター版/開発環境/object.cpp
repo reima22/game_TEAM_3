@@ -4,20 +4,16 @@
 // Author : Mare Horiai
 //
 //==============================================================================
+#include "game.h"
 #include "main.h"
-#include "renderer.h"
 #include "manager.h"
-#include "object.h"
 #include "model.h"
-#include "input.h"
-#include "gamepad.h"
+#include "object.h"
+#include "renderer.h"
+#include "select.h"
 #include "shadow.h"
 #include "textdata.h"
 #include "textdata_object.h"
-#include "player.h"
-#include "game.h"
-#include "collision.h"
-#include "select.h"
 
 //==============================================================================
 // コンストラクタ
@@ -102,6 +98,7 @@ void CObject::Update(void)
 	// モデルポインタ
 	if (m_pModel != NULL)
 	{
+		// 移動処理
 		if (m_bDropOut == false)
 		{
 			if (m_moveType != MOVETYPE_NONE)
@@ -137,7 +134,7 @@ void CObject::Update(void)
 		m_bDropOut = true;
 	}
 
-	// チュートリアル足場の処理
+	// チュートリアル足場の処理、落ちた足場は自動で復活する
 	if (m_objAttribute == OBJATTRIBUTE_SCAFFORD_TUTO && m_bDropOut == true && m_pos.y < -1000.0f)
 	{
 		m_bDropOut = false;
@@ -230,14 +227,14 @@ HRESULT CObject::InitFromData(void)
 	CTextDataObject *pDataObject = CTextData::GetDataObject(select);
 
 	// データの取得
-	m_pos = pDataObject->GetPosition(m_nIdx);
-	m_rot = pDataObject->GetRotation(m_nIdx);
-	m_nType = pDataObject->GetTypeObject(m_nIdx);
-	m_shadowSize = pDataObject->GetShadowSize(m_nIdx);
-	m_moveType = pDataObject->GetMoveType(m_nIdx);
-	m_fMovePower = pDataObject->GetMovePower(m_nIdx);
-	m_pFileName = pDataObject->GetFileName(m_nType);
-	m_objAttribute = pDataObject->GetObjAttribute(m_nIdx);
+	m_pos = pDataObject->GetPosition(m_nIdx);				// 位置
+	m_rot = pDataObject->GetRotation(m_nIdx);				// 角度
+	m_nType = pDataObject->GetTypeObject(m_nIdx);			// オブジェクトの種類
+	m_shadowSize = pDataObject->GetShadowSize(m_nIdx);		// 影のサイズ
+	m_moveType = pDataObject->GetMoveType(m_nIdx);			// 移動の方法
+	m_fMovePower = pDataObject->GetMovePower(m_nIdx);		// 移動力
+	m_pFileName = pDataObject->GetFileName(m_nType);		// オブジェクトのファイル名
+	m_objAttribute = pDataObject->GetObjAttribute(m_nIdx);	// オブジェクトの属性
 
 	// モデルの生成
 	m_pModel = CModel::Create(m_pFileName, m_pos, m_rot);
@@ -268,7 +265,7 @@ CObject *CObject::CreateFromData(int nIdx)
 	if (pObject != NULL)
 	{
 		// 情報の設定
-		pObject->SetIdx(nIdx);
+		pObject->SetIdx(nIdx);		// インデックス
 
 		pObject->InitFromData();
 	}
@@ -399,8 +396,9 @@ void CObject::ResetObject(void)
 //==============================================================================
 void CObject::PhantomObject(void)
 {
+	// 影オブジェクトの半透明化
 	if (m_objAttribute == OBJATTRIBUTE_PHANTOM && m_pModel != NULL)
 	{
-		m_pModel->SetCol(D3DXCOLOR(0.8f, 0.8f, 0.8f, 0.5f));
+		m_pModel->SetCol(PHANTOM_OBJ);
 	}
 }

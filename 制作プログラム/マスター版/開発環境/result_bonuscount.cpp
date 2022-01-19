@@ -4,18 +4,8 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
-#include "fade.h"
 #include "bonus_count.h"
 #include "result_bonuscount.h"
-#include "fall_count.h"
-
 
 //==============================================================================
 // コンストラクタ

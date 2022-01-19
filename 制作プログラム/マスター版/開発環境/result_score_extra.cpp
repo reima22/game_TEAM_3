@@ -4,21 +4,12 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
-#include "result_score_extra.h"
-#include "fade.h"
-#include "score.h"
-#include "number.h"
-#include "result_score.h"
-#include "fall_count.h"
-#include "timer_count.h"
 #include "bonus_count.h"
+#include "fade.h"
+#include "fall_count.h"
+#include "number.h"
+#include "result_score_extra.h"
+#include "timer_count.h"
 
 //==============================================================================
 // コンストラクタ

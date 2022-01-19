@@ -9,11 +9,10 @@
 
 #include "main.h"
 #include "scene.h"
-#include "scene3D.h"
+//#include "scene3D.h"
 
 // マクロ定義
-#define MOVE_POWER	(0.1f)
-#define MOVE_RADIUS	(2.0f)
+#define PHANTOM_OBJ	(D3DXCOLOR(0.8f, 0.8f, 0.8f, 0.5f))		// 幻影オブジェクトの色
 
 // 前方宣言
 class CModel;			// モデルクラス
@@ -66,15 +65,15 @@ public:
 		float movePower,
 		OBJATTRIBUTE objAttribute);
 
+	// テキストデータからの読み込み
 	HRESULT InitFromData(void);
 	static CObject *CreateFromData(int nIdx);
 
-	void MoveObject(void);
-	void DropObject(void);
-	void ResetObject(void);
+	void MoveObject(void);		// オブジェクトの移動
+	void DropObject(void);		// オブジェクトの落下
+	void ResetObject(void);		// オブジェクトの再配置
 
 	void PhantomObject(void);	// オブジェクトの幻影化
-
 
 	// インデックスの取得・設定
 	int GetIdx(void) { return m_nIdx; }
@@ -92,8 +91,10 @@ public:
 	int GetType(void) { return m_nType; }
 	void SetType(int nType) { m_nType = nType; }
 
+	// 影のサイズ設定
 	void SetShadowSize(D3DXVECTOR2 shadowSize) { m_shadowSize = shadowSize; }
 
+	// モデルの取得
 	CModel *GetModel(void) { return m_pModel; }
 
 	// ファイル名パスの取得・設定

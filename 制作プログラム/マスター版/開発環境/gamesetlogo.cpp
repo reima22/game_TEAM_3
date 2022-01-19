@@ -4,16 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "number.h"
-#include "texture.h"
-#include "gamesetlogo.h"
-#include "select.h"
 #include "game.h"
+#include "gamesetlogo.h"
+#include "main.h"
+#include "manager.h"
 #include "player.h"
+#include "renderer.h"
+#include "scene2D.h"
 
 //==============================================================================
 // コンストラクタ
@@ -40,19 +37,12 @@ HRESULT CGamesetLogo::Init(void)
 	CPlayer *pPlayer = CGame::GetPlayer();
 
 	if (m_pScene2D == NULL)
-	{
-		// 2Dポリゴンを生成
-		m_pScene2D = CScene2D::Create();
-
-		// 位置設定
-		m_pScene2D->SetPosition(LOGO_POS);
-
-		// サイズ設定
-		m_pScene2D->SetSize(LOGO_SIZE);
-
-		m_pScene2D->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-
-		m_pScene2D->SetTex(1, 1, 0, 0, 0, 0);
+	{		
+		m_pScene2D = CScene2D::Create();						// 2Dポリゴンを生成	
+		m_pScene2D->SetPosition(LOGO_POS);						// 位置設定
+		m_pScene2D->SetSize(LOGO_SIZE);							// サイズ設定
+		m_pScene2D->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));	// 色の設定
+		m_pScene2D->SetTex(1, 1, 0, 0, 0.0f, 0.0f);				// テクスチャの分割情報
 
 		// テクスチャ設定
 		if (pPlayer->GetGameClear() == true)
@@ -73,6 +63,7 @@ HRESULT CGamesetLogo::Init(void)
 //==============================================================================
 void CGamesetLogo::Uninit(void)
 {
+	// 2Dポリゴンの破棄
 	if (m_pScene2D != NULL)
 	{
 		m_pScene2D->Uninit();
@@ -105,7 +96,7 @@ CGamesetLogo *CGamesetLogo::Create(void)
 	CGamesetLogo *pGamesetLogo;
 	pGamesetLogo = new CGamesetLogo;
 
-	// CNumberの初期化
+	// ロゴの初期化
 	if (pGamesetLogo != NULL)
 	{
 		pGamesetLogo->Init();

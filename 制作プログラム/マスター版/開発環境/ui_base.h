@@ -8,7 +8,7 @@
 #define _UI_BASE_H_
 
 #include "main.h"
-#include "scene.h"
+//#include "scene.h"
 
 //==============================================================================
 // タイマークラス
@@ -26,7 +26,6 @@ public:
 	static CUiBase *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, char *pTypeCheck);
 
 private:
-	CScene2D *m_pScene2D;
+	CScene2D *m_pScene2D;	// 2Dポリゴンポインタ
 };
-
 #endif

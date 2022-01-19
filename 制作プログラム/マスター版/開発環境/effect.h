@@ -10,6 +10,14 @@
 #include "main.h"
 #include "scene.h"
 
+// マクロ定義
+#define EFFECT_SPEED_DOWN		(0.1f)	// 減衰係数
+#define EFFECT_NUM_SANDSMOKE	(1)		// 砂煙エフェクト数
+#define EFFECT_NUM_LANDING		(20)	// 着地エフェクト数
+#define EFFECT_NUM_WATER		(20)	// 水没エフェクト数
+#define EFFECT_NUM_LAVA			(1)		// 溶岩落下エフェクト数
+
+// 前方宣言
 class CScene2D;
 
 //==============================================================================

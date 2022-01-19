@@ -4,16 +4,12 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-//#include "fall.h"
-//#include "fall_count.h"
-//#include "fall_logo.h"
 #include "bonus.h"
 #include "bonus_count.h"
 #include "bonus_logo.h"
+#include "main.h"
+#include "manager.h"
+#include "renderer.h"
 #include "ui_base.h"
 
 //==============================================================================

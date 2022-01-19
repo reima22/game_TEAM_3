@@ -4,14 +4,10 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene3D.h"
-#include "renderer.h"
 #include "manager.h"
-#include "input.h"
-#include "player.h"
+#include "renderer.h"
+#include "scene3D.h"
 #include "texture.h"
-#include "fade.h"
 
 //==============================================================================
 // コンストラクタ

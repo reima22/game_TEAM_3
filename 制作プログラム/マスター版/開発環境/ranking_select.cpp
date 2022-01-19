@@ -4,20 +4,17 @@
 // Author : Tatsuki Matsuda
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "ranking_select.h"
-#include "input.h"
-#include "gamepad.h"
 #include "fade.h"
-#include "sound.h"
-#include "textdata.h"
+#include "gamepad.h"
+#include "input.h"
+#include "ranking_select.h"
+#include "scene2D.h"
 #include "textdata_rankingselect.h"
 
+//==============================================================================
 // 静的メンバ変数宣言
-CScene2D *CRankingSelect::m_apScene2D[RANKING_MAX] = {};
+//==============================================================================
+CScene2D *CRankingSelect::m_apScene2D[RANKING_MAX] = {};	// 2Dポリゴンポインタ
 CRankingSelect::RANKING CRankingSelect::m_ranking;			// 選択中のカーソル
 D3DXCOLOR CRankingSelect::m_col;							// 選択中カーソルの色
 
@@ -58,9 +55,6 @@ HRESULT CRankingSelect::Init(void)
 		m_apScene2D[nCnt]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
 		m_apScene2D[nCnt]->BindTextureNum(nTexIdx);
 	}
-
-	//m_apScene2D[RANKING_RETRY]->BindTexture("RANKING_RETRY");
-	//m_apScene2D[RANKING_QUIT]->BindTexture("RANKING_QUIT");
 
 	// 初期化
 	m_ranking = RANKING_RETRY;

@@ -8,16 +8,20 @@
 #define _CHECKPOINT_LOGO_H_
 
 #include "main.h"
-#include "scene2D.h"
+#include "scene.h"
 
 // マクロ定義
-#define CHECK_SIZE	(D3DXVECTOR2(400.0f, 80.0f))
-#define CHECK_POS	(D3DXVECTOR3(SCREEN_WIDTH + CHECK_SIZE.x, 360.0f, 0.0f))
+#define CHECK_POS	(D3DXVECTOR3(SCREEN_WIDTH + CHECK_SIZE.x, 360.0f, 0.0f))	// 位置
+#define CHECK_SIZE	(D3DXVECTOR2(400.0f, 80.0f))								// サイズ
+#define CHECK_MOVE	(20.0f)														// 移動力
+
+// 前方宣言
+class CScene2D;
 
 //==============================================================================
 // チェックポイントクラス
 //==============================================================================
-class CCheckpointLogo : public CScene2D
+class CCheckpointLogo : public CScene
 {
 public:
 	// 移動状態
@@ -39,12 +43,14 @@ public:
 
 	static CCheckpointLogo *Create(void);
 
+	// 移動方法の設定
 	void MoveTypeNext(void) { if(m_logoMove == LOGOMOVE_NONE)m_logoMove = (LOGOMOVE)(m_logoMove + 1); }
+	
+	// ロゴの移動
 	void MoveLogo(void);
 
 private:
 	CScene2D *m_pScene2D;	// 2Dポリゴンクラス
-	D3DXVECTOR3 m_pos;		// 位置
 	LOGOMOVE m_logoMove;	// 移動状態
 	int m_nCntStop;			// 停止間カウント
 };

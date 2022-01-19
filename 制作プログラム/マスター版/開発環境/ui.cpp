@@ -4,24 +4,24 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "ui.h"
-#include "timer.h"
-#include "fall.h"
 #include "bonus.h"
-#include "start_cntdown.h"
 #include "checkpoint_logo.h"
+#include "fall.h"
+#include "main.h"
+#include "start_cntdown.h"
+#include "timer.h"
 #include "timeralert_logo.h"
+#include "ui.h"
 
 //==============================================================================
 // 静的メンバ変数
 //==============================================================================
-CTimer *CUi::m_pTimer = NULL;
-CFall *CUi::m_pFall = NULL;
-CBonus *CUi::m_pBonus = NULL;
-CStartCntdown *CUi::m_pStartCntdown = NULL;
-CCheckpointLogo *CUi::m_pCheckPointLogo = NULL;
-CAlertLogo * CUi::m_pAlertLogo = NULL;
+CTimer			*CUi::m_pTimer = NULL;			// タイマーポインタ
+CFall			*CUi::m_pFall = NULL;			// 落下数ポインタ
+CBonus			*CUi::m_pBonus = NULL;			// ボーナスポインタ
+CStartCntdown	*CUi::m_pStartCntdown = NULL;	// スタートカウントダウンポインタ
+CCheckpointLogo	*CUi::m_pCheckPointLogo = NULL;	// チェックポイントポインタ
+CAlertLogo		*CUi::m_pAlertLogo = NULL;		// アラートポインタ
 
 //==============================================================================
 // コンストラクタ

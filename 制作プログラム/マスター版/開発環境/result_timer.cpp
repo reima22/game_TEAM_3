@@ -1,18 +1,9 @@
 //==============================================================================
 //
-// リザルトタイマー描画処理〔result_fallcount.cpp〕
+// リザルトタイマー描画処理〔result_timer.cpp〕
 // Author : Mare Horiai
 //
 //==============================================================================
-//#define _CRT_SECURE_NO_WARNINGS
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
-#include "fade.h"
 #include "result_timer.h"
 #include "timer_count.h"
 

@@ -4,20 +4,20 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "pause_select.h"
-#include "input.h"
 #include "gamepad.h"
 #include "fade.h"
+#include "input.h"
+#include "main.h"
+#include "manager.h"
+#include "renderer.h"
+#include "pause_select.h"
+#include "scene2D.h"
 #include "sound.h"
 #include "textdata.h"
 #include "textdata_pause.h"
 
 // 静的メンバ変数宣言
-CScene2D *CPauseSelect::m_apScene2D[PAUSE_MAX] = {};
+CScene2D *CPauseSelect::m_apScene2D[PAUSE_MAX] = {};	// 選択画面の画像ポインタ
 CPauseSelect::PAUSE CPauseSelect::m_pause;				// 選択中のカーソル
 D3DXCOLOR CPauseSelect::m_col;							// 選択中カーソルの色
 
@@ -58,10 +58,6 @@ HRESULT CPauseSelect::Init(void)
 		m_apScene2D[nCnt]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
 		m_apScene2D[nCnt]->BindTextureNum(nTexIdx);
 	}
-
-	//m_apScene2D[PAUSE_CONTINUE]->BindTextureNum("PAUSE_CONTINUE");
-	//m_apScene2D[PAUSE_RETRY]->BindTextureNum("PAUSE_RETRY");
-	//m_apScene2D[PAUSE_QUIT]->BindTextureNum("PAUSE_QUIT");
 
 	// 初期化
 	m_pause = PAUSE_CONTINUE;

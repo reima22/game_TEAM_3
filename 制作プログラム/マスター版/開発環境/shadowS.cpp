@@ -4,13 +4,8 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene3D.h"
-#include "renderer.h"
 #include "manager.h"
-#include "sceneX.h"
-#include "texture.h"
-#include "model.h"
+#include "renderer.h"
 #include "shadowS.h"
 
 //==============================================================================

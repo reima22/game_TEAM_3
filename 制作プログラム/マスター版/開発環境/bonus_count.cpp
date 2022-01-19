@@ -4,15 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "number.h"
-#include "texture.h"
 #include "bonus_count.h"
-#include "select.h"
+#include "main.h"
+#include "manager.h"
 #include "mode.h"
+#include "number.h"
+#include "renderer.h"
+#include "texture.h"
 
 // Ã“Iƒƒ“ƒo•Ï”
 int CBonusCount::m_nSaveBonus = 0;
@@ -43,8 +41,6 @@ CBonusCount::~CBonusCount()
 //==============================================================================
 HRESULT CBonusCount::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
-
 	// —‰º”İ’è
 	m_nBonus = 0;
 

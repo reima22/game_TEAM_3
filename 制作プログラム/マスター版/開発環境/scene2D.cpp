@@ -4,14 +4,12 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "input.h"
-#include "player.h"
-#include "texture.h"
 #include "fade.h"
+#include "main.h"
+#include "manager.h"
+#include "renderer.h"
+#include "scene2D.h"
+#include "texture.h"
 
 //==============================================================================
 // コンストラクタ
@@ -23,7 +21,6 @@ CScene2D::CScene2D(int nPriority) : CScene(nPriority)
 	m_size = VECTOR2_NULL;
 	m_fLength = 0.0f;
 	m_fAngle = 0.0f;
-	//m_bEffectBlend = false;
 	m_bZbuff = false;
 	m_bAlphaBlend = false;
 }

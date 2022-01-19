@@ -4,24 +4,17 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#define _CRT_SECURE_NO_WARNINGS
-#include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
-#include "manager.h"
-#include "polygon.h"
-#include "sound.h"
-#include "title.h"
+#include "number.h"
 #include "ranking.h"
-//#include "ranking_rank.h"
 #include "ranking_score.h"
 #include "result_score.h"
-#include "number.h"
-#include "textdata_ranking.h"
+#include "scene2D.h"
 #include "stdio.h"
-#include "select.h"
+#include "textdata_ranking.h"
 
+//==============================================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
+//==============================================================================
 int CRankingScore::m_aScore[RANK_NUM];
 
 //==============================================================================

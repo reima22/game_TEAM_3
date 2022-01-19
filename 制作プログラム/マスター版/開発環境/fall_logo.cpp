@@ -4,14 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
+#include "fall_logo.h"
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "number.h"
+#include "renderer.h"
+#include "scene2D.h"
 #include "texture.h"
-#include "fall_logo.h"
-#include "select.h"
 
 //==============================================================================
 // コンストラクタ
@@ -34,8 +33,6 @@ CFallLogo::~CFallLogo()
 //==============================================================================
 HRESULT CFallLogo::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CStageSelect::STAGE_SELECT select = CStageSelect::GetSelectingStage();
-
 	// 2Dポリゴンを生成
 	m_pScene2D = CScene2D::Create();
 

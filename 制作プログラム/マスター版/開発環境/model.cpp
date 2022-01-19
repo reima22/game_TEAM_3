@@ -4,7 +4,6 @@
 // Author : Mare Horiai
 //
 //==============================================================================
-#include "main.h"
 #include "renderer.h"
 #include "manager.h"
 #include "model.h"

@@ -11,7 +11,8 @@
 #include "scene2D.h"
 
 // マクロ定義
-#define START_CNT_SIZE	(D3DXVECTOR2(100.0f,100.0f))
+#define START_CNT_SIZE	(D3DXVECTOR2(100.0f,100.0f))	// カウントダウン表示のサイズ
+#define COUNT_DOWN_NUM	(3)								// カウント数
 
 //==============================================================================
 // 開始時カウントダウンクラス
@@ -19,6 +20,7 @@
 class CStartCntdown : public CScene
 {
 public:
+	// カウントの種類
 	typedef enum
 	{
 		CNTDOWN_GO = 0,	// テクスチャ「GO」
@@ -37,26 +39,19 @@ public:
 
 	static CStartCntdown *Create(void);
 
-	//void TimerDecrease(void);		// タイマー減少
-
-	// タイマー数値の取得・設定
-	//int GetNumber(void) { return m_nTimer; }
-	//void SetNumber(int nTimer);
-
-	// タイマーカウント開始フラグ設定
+	// タイマーカウント開始フラグ取得・設定
 	bool GetStartCntdown(void) { return m_bStartCntdown; }
 	void SetStartCntdown(bool bStartCntdown) { m_bStartCntdown = bStartCntdown; }
 
+	// カウントダウン処理中のフラグ取得
 	bool GetCntDown(void) { return m_bCntDowning; }
 
 private:
-	CScene2D *m_pScene2D;							// 2Dポリゴンクラスポインタ
-	//LPDIRECT3DTEXTURE9 m_pTexture[CNTDOWM_MAX];	// カウントテクスチャ
-	int m_nCntDown;									// タイマー数値
-	int m_nDecereaseCnt;							// 減少カウンター
-	CNTDOWN m_cntDown;								// 現在のカウント
-	bool m_bStartCntdown;							// カウント開始のフラグ
-	bool m_bCntDowning;								// カウントダウン中
+	CScene2D *m_pScene2D;	// 2Dポリゴンクラスポインタ
+	int m_nCntDown;			// タイマー数値
+	int m_nDecereaseCnt;	// 減少カウンター
+	CNTDOWN m_cntDown;		// 現在のカウント
+	bool m_bStartCntdown;	// カウント開始のフラグ
+	bool m_bCntDowning;		// カウントダウン中
 };
-
 #endif

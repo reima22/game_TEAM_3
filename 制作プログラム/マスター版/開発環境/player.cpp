@@ -254,6 +254,9 @@ void CPlayer::MovePlayer(void)
 		{// ジャンプから着地
 			if (m_pMotionPlayer->GetMotion() == CMotionPlayer::MOTIONTYPE_JUMP || m_pMotionPlayer->GetMotion() == CMotionPlayer::MOTIONTYPE_RUN)
 			{
+				// 砂煙エフェクト
+				CEffectDetail::Create(CEffectDetail::EFFECTTYPE_LANDING, m_pos);
+
 				// 着地モーション
 				m_pMotionPlayer->SetMotion(CMotionPlayer::MOTIONTYPE_LANDING);
 			}
@@ -677,13 +680,6 @@ void CPlayer::Collision(void)
 				{
 					if (pCollision->Collision3D(this, pModel) == true)
 					{
-						// 砂煙エフェクト
-						if (m_nCntSandEffect < 1)
-						{
-							CEffectDetail::Create(CEffectDetail::EFFECTTYPE_LANDING, m_pos);
-							m_nCntSandEffect++;
-						}
-
 						// 足場ボーナス
 						if ((pObject->GetObjAttribute() == CObject::OBJATTRIBUTE_SCAFFORD ||
 							pObject->GetObjAttribute() == CObject::OBJATTRIBUTE_SCAFFORD_NODROP) && pObject->GetBonus() == false)

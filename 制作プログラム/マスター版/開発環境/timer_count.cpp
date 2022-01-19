@@ -4,15 +4,15 @@
 // Author : Mare Horiai
 //
 //==============================================================================
+#include "game.h"
 #include "main.h"
-#include "scene2D.h"
-#include "renderer.h"
 #include "manager.h"
 #include "number.h"
+#include "renderer.h"
+#include "scene2D.h"
 #include "timer_count.h"
-#include "game.h"
-#include "ui.h"
 #include "timeralert_logo.h"
+#include "ui.h"
 
 // 静的メンバ変数宣言
 int CTimerCount::m_nTimerResult = 0;	// リザルトへ引き継ぐ値
