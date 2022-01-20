@@ -7,7 +7,6 @@
 #include "fade.h"
 #include "gamepad.h"
 #include "input.h"
-//#include "main.h"
 #include "manager.h"
 #include "polygon.h"
 #include "renderer.h"

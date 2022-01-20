@@ -324,6 +324,7 @@ void CPlayer::ControlPlayer(void)
 		{
 			m_pMotionPlayer->SetMotion(CMotionPlayer::MOTIONTYPE_JUMP);		// ジャンプモーション切り替え
 			m_move.y = 0.5f;												// 初期ジャンプ力の設定
+			m_pos.y += 1.5f;
 			m_pSound->Play(CSound::SOUND_LABEL_SE_JUMP);					// ジャンプ音
 		}
 
@@ -647,7 +648,7 @@ void CPlayer::Collision(void)
 	}
 
 	// 他オブジェクトとの当たり判定
-	CCollision *pCollision;
+	CCollision *pCollision = NULL;
 	pCollision = CManager::GetCollision(); // 当たり判定取得
 
 	// 開始時カウント
@@ -734,8 +735,6 @@ void CPlayer::Collision(void)
 						{
 							pObject->SetDropOut(true);
 						}
-
-						//break;			// 判定有効でループ文脱出
 					}
 				}
 			}

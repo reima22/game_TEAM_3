@@ -4,11 +4,13 @@
 // Author : Mare Horiai
 //
 //==============================================================================
+#include "camera.h"
 #include "game.h"
 #include "main.h"
 #include "manager.h"
 #include "model.h"
 #include "object.h"
+#include "player.h"
 #include "renderer.h"
 #include "select.h"
 #include "shadow.h"
@@ -155,30 +157,50 @@ void CObject::Update(void)
 //==============================================================================
 void CObject::Draw(void)
 {
-	// ローカル変数宣言
-	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	// デバイスの取得
-	D3DXMATRIX mtxRot, mtxTrans;										// 計算用マトリックス
-	D3DMATERIAL9 matDef;												// 現在のマテリアル保存用
+	D3DXVECTOR3 posPlayer;
+	posPlayer = CGame::GetPlayer()->GetPosition();
 
-	// ワールドマトリックスの初期化
-	D3DXMatrixIdentity(&m_mtxWorld);
+	// 距離
+	D3DXVECTOR3 posDistance = m_pos - posPlayer;
 
-	// ワールドマトリックスの設定
-	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
-
-	// 現在のマテリアルを取得
-	pDevice->GetMaterial(&matDef);
-
-	// モデルの描画
-	if (m_pModel != NULL)
+	// 描画距離の補正
+	if (posDistance.x < 0)
 	{
-		m_pModel->Draw();
+		posDistance.x *= -1;
 	}
 
-	// 影の追従
-	if (m_pShadow != NULL)
+	if (posDistance.z < 0)
 	{
-		m_pShadow->Draw();
+		posDistance.z *= -1;
+	}
+
+	//if (posDistance.x < 500.0f || posDistance.z < 500.0f)
+	{
+		// ローカル変数宣言
+		LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	// デバイスの取得
+		D3DXMATRIX mtxRot, mtxTrans;										// 計算用マトリックス
+		D3DMATERIAL9 matDef;												// 現在のマテリアル保存用
+
+		// ワールドマトリックスの初期化
+		D3DXMatrixIdentity(&m_mtxWorld);
+
+		// ワールドマトリックスの設定
+		pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
+
+		// 現在のマテリアルを取得
+		pDevice->GetMaterial(&matDef);
+
+		// モデルの描画
+		if (m_pModel != NULL)
+		{
+			m_pModel->Draw();
+		}
+
+		// 影の追従
+		if (m_pShadow != NULL)
+		{
+			m_pShadow->Draw();
+		}
 	}
 }
 

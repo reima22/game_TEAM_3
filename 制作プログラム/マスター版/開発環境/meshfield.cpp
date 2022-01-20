@@ -56,7 +56,7 @@ HRESULT CMeshfield::Init(void)
 	m_fWidth = pDataMeshfield->GetSize(m_nIdx).x;
 	m_fDepth = pDataMeshfield->GetSize(m_nIdx).y;
 	
-	m_pTexture = pTexture->GetAddress("TEX0");
+	m_pTexture = pTexture->GetAddress("TEX1");
 
 	// Še•Ï”‚ÌŒvZ
 	m_nAllPoint = m_nDepth * 2 * (m_nWidth + 2) - 2;				// ‘’¸“_”
