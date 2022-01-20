@@ -262,7 +262,7 @@ void CResult::UpdateScore(void)
 			{
 			case CResultScore::SCORETYPE_TIMER:	// タイマー
 
-				m_pResultScoreEx[EXSCORETYPE_TIMER_CALCU]->SetCol(D3DXCOLOR(0.2f, 0.2f, 1.0f, 1.0f));
+				m_pResultScoreEx[EXSCORETYPE_TIMER_CALCU]->SetCol(D3DXCOLOR(0.4f, 0.4f, 1.0f, 1.0f));
 
 				break;
 
@@ -274,7 +274,7 @@ void CResult::UpdateScore(void)
 
 			case CResultScore::SCORETYPE_BONUS:	// ボーナス
 
-				m_pResultScoreEx[EXSCORETYPE_BONUS_CALCU]->SetCol(D3DXCOLOR(0.2f, 0.2f, 1.0f, 1.0f));
+				m_pResultScoreEx[EXSCORETYPE_BONUS_CALCU]->SetCol(D3DXCOLOR(0.4f, 0.4f, 1.0f, 1.0f));
 
 				break;
 
